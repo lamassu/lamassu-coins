@@ -25,12 +25,9 @@ function parseUrl (network, uri) {
 }
 
 function isValidAddress (address) {
-  if (address.toUpperCase() === address || address.toLowerCase() === address) {
-    if (address.indexOf('0x') !== 0) return false
-    return true
-  }
-
-  return isChecksumAddress(address)
+  return (address.toUpperCase() === address || address.toLowerCase() === address) 
+    ? address.indexOf('0x') === 0
+    : isChecksumAddress(address)
 }
 
 /* Adapted from web3.js https://github.com/ethereum/web3.js */
