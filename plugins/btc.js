@@ -25,6 +25,10 @@ function parseUrl (network, url) {
   return address
 }
 
+function buildUrl (address) {
+  return `bitcoin:${address}`
+}
+
 function depositUrl (address, amount) {
   const parts = _.split(':', address)
 
@@ -66,6 +70,7 @@ function createWallet () {
 module.exports = {
   depositUrl,
   parseUrl,
+  buildUrl,
   formatAddress,
   base58Opts,
   bech32Opts,

@@ -17,6 +17,10 @@ function parseUrl (network, url) {
   return address
 }
 
+function buildUrl (address) {
+  return `dash:${address}`
+}
+
 function depositUrl (address, amount) {
   return `dash:${address}?amount=${amount}`
 }
@@ -31,5 +35,6 @@ function validate (network, address) {
 module.exports = {
   depositUrl,
   parseUrl,
+  buildUrl,
   base58Opts
 }

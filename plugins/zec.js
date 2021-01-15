@@ -27,6 +27,10 @@ function depositUrl (address, amount) {
   return `zcash:${address}?amount=${amount}`
 }
 
+function buildUrl (address) {
+  return `zcash:${address}`
+}
+
 function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
@@ -36,5 +40,6 @@ function validate (network, address) {
 module.exports = {
   depositUrl,
   parseUrl,
+  buildUrl,
   base58Opts
 }

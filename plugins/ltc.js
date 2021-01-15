@@ -27,6 +27,10 @@ function depositUrl (address, amount) {
   return `litecoin:${address}?amount=${amount}`
 }
 
+function buildUrl (address) {
+  return `litecoin:${address}`
+}
+
 function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
@@ -38,6 +42,7 @@ function validate (network, address) {
 module.exports = {
   depositUrl,
   parseUrl,
+  buildUrl,
   base58Opts,
   bech32Opts
 }

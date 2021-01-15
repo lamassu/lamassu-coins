@@ -24,6 +24,10 @@ function parseUrl (network, uri) {
   }
 }
 
+function buildUrl (address) {
+  return `ethereum:${address}`
+}
+
 function isValidAddress (address) {
   return (address.toUpperCase() === address || address.toLowerCase() === address) 
     ? address.indexOf('0x') === 0
@@ -59,5 +63,6 @@ function isChecksumAddress (address) {
 
 module.exports = {
   depositUrl,
-  parseUrl
+  parseUrl,
+  buildUrl
 }

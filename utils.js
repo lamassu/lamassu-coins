@@ -1,75 +1,7 @@
 const path = require('path')
-
 const _ = require('lodash/fp')
 
-const CRYPTO_CURRENCIES = [
-  {
-    cryptoCode: 'BTC',
-    display: 'Bitcoin',
-    code: 'bitcoin',
-    configFile: 'bitcoin.conf',
-    daemon: 'bitcoind',
-    defaultPort: 8332,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true
-  },
-  {
-    cryptoCode: 'ETH',
-    display: 'Ethereum',
-    code: 'ethereum',
-    configFile: 'geth.conf',
-    daemon: 'geth',
-    defaultPort: 8545,
-    unitScale: 18,
-    displayScale: 15,
-    zeroConf: false
-  },
-  {
-    cryptoCode: 'LTC',
-    display: 'Litecoin',
-    code: 'litecoin',
-    configFile: 'litecoin.conf',
-    daemon: 'litecoind',
-    defaultPort: 9332,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true
-  },
-  {
-    cryptoCode: 'DASH',
-    display: 'Dash',
-    code: 'dash',
-    configFile: 'dash.conf',
-    daemon: 'dashd',
-    defaultPort: 9998,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true
-  },
-  {
-    cryptoCode: 'ZEC',
-    display: 'Zcash',
-    code: 'zcash',
-    configFile: 'zcash.conf',
-    daemon: 'zcashd',
-    defaultPort: 8232,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true
-  },
-  {
-    cryptoCode: 'BCH',
-    display: 'Bitcoin Cash',
-    code: 'bitcoincash',
-    configFile: 'bitcoincash.conf',
-    daemon: 'bitcoincashd',
-    defaultPort: 8335,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true
-  }
-]
+const consts = require('./config/consts')
 
 const PLUGINS = {
   BTC: require('./plugins/btc'),
@@ -81,24 +13,20 @@ const PLUGINS = {
 }
 
 function getCryptoCurrency (cryptoCode) {
-  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], CRYPTO_CURRENCIES)
+  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
   if (!cryptoCurrency) throw new Error(`Unsupported crypto: ${cryptoCode}`)
   return cryptoCurrency
 }
 
 function cryptoCurrencies () {
-  return CRYPTO_CURRENCIES
+  return consts.CRYPTO_CURRENCIES
 }
 
 function buildUrl (cryptoCode, address) {
-  switch (cryptoCode) {
-    case 'BTC': return `bitcoin:${address}`
-    case 'ETH': return `ethereum:${address}`
-    case 'ZEC': return `zcash:${address}`
-    case 'LTC': return `litecoin:${address}`
-    case 'DASH': return `dash:${address}`
-    case 'BCH': return `${address}`
-    default: throw new Error(`Unsupported crypto: ${cryptoCode}`)
+  try {
+    return PLUGINS[cryptoCode].buildUrl(address)
+  } catch (err) {
+    throw new Error(`Unsupported crypto: ${cryptoCode}`)
   }
 }
 

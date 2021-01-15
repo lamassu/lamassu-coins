@@ -15,6 +15,10 @@ function parseUrl (network, url) {
   return address
 }
 
+function buildUrl (address) {
+  return `${address}`
+}
+
 function depositUrl (address, amount) {
   return `${address}?amount=${amount}`
 }
@@ -43,5 +47,6 @@ function formatAddress (address) {
 module.exports = {
   depositUrl,
   parseUrl,
+  buildUrl,
   formatAddress
 }
