@@ -12,7 +12,7 @@
     "lodash": "^4.17.10"
   },
   "scripts": {
-    "test-dev": "jest"
+    "test-dev": "npx jest"
   },
   "description": "",
   "main": "index.js",

@@ -11,7 +11,7 @@ const COINS = {
 
 const CRYPTO_CURRENCIES = [
   {
-    cryptoCode: 'BTC',
+    cryptoCode: COINS.BTC,
     display: 'Bitcoin',
     code: 'bitcoin',
     configFile: 'bitcoin.conf',
@@ -22,7 +22,7 @@ const CRYPTO_CURRENCIES = [
     zeroConf: true
   },
   {
-    cryptoCode: 'ETH',
+    cryptoCode: COINS.ETH,
     display: 'Ethereum',
     code: 'ethereum',
     configFile: 'geth.conf',
@@ -33,7 +33,7 @@ const CRYPTO_CURRENCIES = [
     zeroConf: false
   },
   {
-    cryptoCode: 'LTC',
+    cryptoCode: COINS.LTC,
     display: 'Litecoin',
     code: 'litecoin',
     configFile: 'litecoin.conf',
@@ -44,7 +44,7 @@ const CRYPTO_CURRENCIES = [
     zeroConf: true
   },
   {
-    cryptoCode: 'DASH',
+    cryptoCode: COINS.DASH,
     display: 'Dash',
     code: 'dash',
     configFile: 'dash.conf',
@@ -55,7 +55,7 @@ const CRYPTO_CURRENCIES = [
     zeroConf: true
   },
   {
-    cryptoCode: 'ZEC',
+    cryptoCode: COINS.ZEC,
     display: 'Zcash',
     code: 'zcash',
     configFile: 'zcash.conf',
@@ -66,7 +66,7 @@ const CRYPTO_CURRENCIES = [
     zeroConf: true
   },
   {
-    cryptoCode: 'BCH',
+    cryptoCode: COINS.BCH,
     display: 'Bitcoin Cash',
     code: 'bitcoincash',
     configFile: 'bitcoincash.conf',

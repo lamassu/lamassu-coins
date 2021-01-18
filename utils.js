@@ -2,15 +2,14 @@ const path = require('path')
 const _ = require('lodash/fp')
 
 const consts = require('./config/consts')
+const BTC = require('./plugins/btc')
+const ETH = require('./plugins/eth')
+const ZEC = require('./plugins/zec')
+const LTC = require('./plugins/ltc')
+const DASH = require('./plugins/dash')
+const BCH = require('./plugins/bch')
 
-const PLUGINS = {
-  BTC: require('./plugins/btc'),
-  ETH: require('./plugins/eth'),
-  ZEC: require('./plugins/zec'),
-  LTC: require('./plugins/ltc'),
-  DASH: require('./plugins/dash'),
-  BCH: require('./plugins/bch')
-}
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH }
 
 function getCryptoCurrency (cryptoCode) {
   const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
@@ -23,11 +22,7 @@ function cryptoCurrencies () {
 }
 
 function buildUrl (cryptoCode, address) {
-  try {
-    return PLUGINS[cryptoCode].buildUrl(address)
-  } catch (err) {
-    throw new Error(`Unsupported crypto: ${cryptoCode}`)
-  }
+  return coinPlugin(cryptoCode).buildUrl(address)
 }
 
 function cryptoDir (cryptoRec, blockchainDir) {
