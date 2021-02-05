@@ -7,8 +7,7 @@ const COINS = {
   DASH: 'DASH',
   ZEC: 'ZEC',
   BCH: 'BCH',
-  USDT: 'USDT',
-  YEENUS: 'YEENUS'
+  USDT: 'USDT'
 }
 
 const CRYPTO_CURRENCIES = [
@@ -98,15 +97,6 @@ const CRYPTO_CURRENCIES = [
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     type: 'erc-20',
     displayCode: 'USDT'
-  },
-  {
-    cryptoCode: COINS.YEENUS,
-    display: 'Yeenus',
-    unitScale: 8,
-    displayScale: 8,
-    contractAddress: '0xF6fF95D53E08c9660dC7820fD5A775484f77183A',
-    type: 'erc-20',
-    displayCode: 'mYEENUS'
   }
 ]
 
