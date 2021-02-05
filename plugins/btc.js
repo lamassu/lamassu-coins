@@ -15,7 +15,7 @@ const bech32Opts = {
 }
 
 function parseUrl (network, url) {
-  const res = /^([bB]itcoin:\/{0,2})?(\w+)/.exec(url)
+  const res = /^(bitcoin:)?(\w+)/i.exec(url)
   const address = res && res[2]
 
   console.log('DEBUG16: [%s] *%s*', network, address)

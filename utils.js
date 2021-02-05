@@ -21,6 +21,20 @@ function cryptoCurrencies () {
   return consts.CRYPTO_CURRENCIES
 }
 
+function getErc20Token (cryptoCode) {
+  const token = _.find(['cryptoCode', cryptoCode], erc20Tokens())
+  if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
+  return token
+}
+
+function erc20Tokens () {
+  return _.filter(e => e.type === 'erc-20', consts.CRYPTO_CURRENCIES)
+}
+
+function isErc20Token (cryptoCode) {
+  return !!getErc20Token(cryptoCode)
+}
+
 function buildUrl (cryptoCode, address) {
   return coinPlugin(cryptoCode).buildUrl(address)
 }
@@ -45,7 +59,7 @@ function formatCryptoAddress(cryptoCode = '', address = '') {
 }
 
 function coinPlugin (cryptoCode) {
-  const plugin = PLUGINS[cryptoCode]
+  const plugin = getCryptoCurrency(cryptoCode).type === 'coin' ? PLUGINS[cryptoCode] : PLUGINS['ETH']
   if (!plugin) throw new Error(`Unsupported coin: ${cryptoCode}`)
   return plugin
 }
@@ -58,6 +72,7 @@ function depositUrl (cryptoCode, address, amountStr) {
 
 function parseUrl (cryptoCode, network, url) {
   const plugin = coinPlugin(cryptoCode)
+  console.log(plugin)
   return plugin.parseUrl(network, url)
 }
 
@@ -83,7 +98,10 @@ module.exports = {
   cryptoDir,
   configPath,
   cryptoCurrencies,
+  erc20Tokens,
   getCryptoCurrency,
+  getErc20Token,
+  isErc20Token,
   toUnit,
   formatCryptoAddress,
   depositUrl,

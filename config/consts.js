@@ -6,7 +6,9 @@ const COINS = {
   LTC: 'LTC',
   DASH: 'DASH',
   ZEC: 'ZEC',
-  BCH: 'BCH'
+  BCH: 'BCH',
+  USDT: 'USDT',
+  YEENUS: 'YEENUS'
 }
 
 const CRYPTO_CURRENCIES = [
@@ -19,7 +21,9 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 8332,
     unitScale: 8,
     displayScale: 5,
-    zeroConf: true
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mBTC'
   },
   {
     cryptoCode: COINS.ETH,
@@ -30,7 +34,9 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 8545,
     unitScale: 18,
     displayScale: 15,
-    zeroConf: false
+    zeroConf: false,
+    type: 'coin',
+    displayCode: 'mETH'
   },
   {
     cryptoCode: COINS.LTC,
@@ -41,7 +47,9 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 9332,
     unitScale: 8,
     displayScale: 5,
-    zeroConf: true
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mLTC'
   },
   {
     cryptoCode: COINS.DASH,
@@ -52,7 +60,9 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 9998,
     unitScale: 8,
     displayScale: 5,
-    zeroConf: true
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mDASH'
   },
   {
     cryptoCode: COINS.ZEC,
@@ -63,7 +73,9 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 8232,
     unitScale: 8,
     displayScale: 5,
-    zeroConf: true
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mZEC'
   },
   {
     cryptoCode: COINS.BCH,
@@ -74,7 +86,27 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 8335,
     unitScale: 8,
     displayScale: 5,
-    zeroConf: true
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mBCH'
+  },
+  {
+    cryptoCode: COINS.USDT,
+    display: 'Tether',
+    unitScale: 6,
+    displayScale: 0,
+    contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    type: 'erc-20',
+    displayCode: 'USDT'
+  },
+  {
+    cryptoCode: COINS.YEENUS,
+    display: 'Yeenus',
+    unitScale: 8,
+    displayScale: 8,
+    contractAddress: '0xF6fF95D53E08c9660dC7820fD5A775484f77183A',
+    type: 'erc-20',
+    displayCode: 'mYEENUS'
   }
 ]
 
