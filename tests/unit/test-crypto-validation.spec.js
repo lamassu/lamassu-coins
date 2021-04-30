@@ -94,6 +94,15 @@ test('Should validate LTC bech32', () => {
   expect(validatedTest).toBe(true)
 })
 
+test('Should validate ZEC bech32', () => {
+  const mainNetaddr = 'zs1kpat3qseujnnukms9yjkx7w3kgzev7jxhauc6cy2s3mupmvsvkvw04u3s35sffmv57leznctn5h'
+  const testNetaddr = 'ztestsapling1kdp74adyfsmm9838jaupgfyx3npgw8ut63stjjx757pc248cuc0ymzphqeux60c64qe5qt68ygh'
+  const validatedMain = cryptoValidator.bech32Validator('main', mainNetaddr, ZEC.bech32Opts)
+  const validatedTest = cryptoValidator.bech32Validator('test', testNetaddr, ZEC.bech32Opts)
+  expect(validatedMain).toBe(true)
+  expect(validatedTest).toBe(true)
+})
+
 test('Should fail length validation', () => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
   const opts = BTC.base58Opts

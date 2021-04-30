@@ -11,6 +11,8 @@ const BCH = require('./plugins/bch')
 
 const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH }
 
+const isBech32Address = require('./plugins/validators').isBech32Address
+
 function getCryptoCurrency (cryptoCode) {
   const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
   if (!cryptoCurrency) throw new Error(`Unsupported crypto: ${cryptoCode}`)
@@ -72,8 +74,8 @@ function depositUrl (cryptoCode, address, amountStr) {
 
 function parseUrl (cryptoCode, network, url) {
   const plugin = coinPlugin(cryptoCode)
-  console.log(plugin)
-  return plugin.parseUrl(network, url)
+  const address = plugin.parseUrl(network, url)
+  return formatAddressCasing(cryptoCode, address)
 }
 
 function formatAddress (cryptoCode, address) {
@@ -82,6 +84,12 @@ function formatAddress (cryptoCode, address) {
   const plugin = coinPlugin(cryptoCode)
   if (!plugin.formatAddress) return address
   return plugin.formatAddress(address)
+}
+
+function formatAddressCasing (cryptoCode, address) {
+  const plugin = coinPlugin(cryptoCode)
+  if (!plugin.bech32Opts) return address
+  return isBech32Address(address, plugin.bech32Opts) ? address.toLowerCase() : address
 }
 
 function createWallet (cryptoCode) {
@@ -107,5 +115,6 @@ module.exports = {
   depositUrl,
   parseUrl,
   formatAddress,
+  formatAddressCasing,
   createWallet
 }
