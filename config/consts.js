@@ -2,11 +2,11 @@ const _ = require('lodash/fp')
 
 const COINS = {
   BTC: 'BTC',
+  BCH: 'BCH',
+  DASH: 'DASH',
   ETH: 'ETH',
   LTC: 'LTC',
-  DASH: 'DASH',
   ZEC: 'ZEC',
-  BCH: 'BCH',
   USDT: 'USDT'
 }
 
@@ -23,6 +23,32 @@ const CRYPTO_CURRENCIES = [
     zeroConf: true,
     type: 'coin',
     displayCode: 'mBTC'
+  },
+  {
+    cryptoCode: COINS.BCH,
+    display: 'Bitcoin Cash',
+    code: 'bitcoincash',
+    configFile: 'bitcoincash.conf',
+    daemon: 'bitcoincashd',
+    defaultPort: 8335,
+    unitScale: 8,
+    displayScale: 5,
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mBCH'
+  },
+  {
+    cryptoCode: COINS.DASH,
+    display: 'Dash',
+    code: 'dash',
+    configFile: 'dash.conf',
+    daemon: 'dashd',
+    defaultPort: 9998,
+    unitScale: 8,
+    displayScale: 5,
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mDASH'
   },
   {
     cryptoCode: COINS.ETH,
@@ -51,17 +77,13 @@ const CRYPTO_CURRENCIES = [
     displayCode: 'mLTC'
   },
   {
-    cryptoCode: COINS.DASH,
-    display: 'Dash',
-    code: 'dash',
-    configFile: 'dash.conf',
-    daemon: 'dashd',
-    defaultPort: 9998,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true,
-    type: 'coin',
-    displayCode: 'mDASH'
+    cryptoCode: COINS.USDT,
+    display: 'Tether',
+    unitScale: 6,
+    displayScale: 0,
+    contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    type: 'erc-20',
+    displayCode: 'USDT'
   },
   {
     cryptoCode: COINS.ZEC,
@@ -75,28 +97,6 @@ const CRYPTO_CURRENCIES = [
     zeroConf: true,
     type: 'coin',
     displayCode: 'mZEC'
-  },
-  {
-    cryptoCode: COINS.BCH,
-    display: 'Bitcoin Cash',
-    code: 'bitcoincash',
-    configFile: 'bitcoincash.conf',
-    daemon: 'bitcoincashd',
-    defaultPort: 8335,
-    unitScale: 8,
-    displayScale: 5,
-    zeroConf: true,
-    type: 'coin',
-    displayCode: 'mBCH'
-  },
-  {
-    cryptoCode: COINS.USDT,
-    display: 'Tether',
-    unitScale: 6,
-    displayScale: 0,
-    contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    type: 'erc-20',
-    displayCode: 'USDT'
   }
 ]
 
