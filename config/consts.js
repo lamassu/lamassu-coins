@@ -33,7 +33,7 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 8545,
     unitScale: 18,
     displayScale: 15,
-    zeroConf: false,
+    zeroConf: true,
     type: 'coin',
     displayCode: 'mETH'
   },
