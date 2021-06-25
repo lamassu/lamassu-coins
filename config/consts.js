@@ -108,7 +108,7 @@ const CRYPTO_CURRENCIES = [
     units:{
       full: {
         displayScale: 6,
-        code: 'LTC'
+        displayCode: 'LTC'
       },
       mili: {
         displayScale: 3,
