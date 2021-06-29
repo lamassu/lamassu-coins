@@ -23,11 +23,11 @@ const CRYPTO_CURRENCIES = [
     type: 'coin',
     units:{
       full: {
-        displayScale: 6,
+        displayScale: 8,
         displayCode: 'BTC'
       },
       mili: {
-        displayScale: 3,
+        displayScale: 5,
         displayCode: 'mBTC'
       }
     }
@@ -44,11 +44,11 @@ const CRYPTO_CURRENCIES = [
     type: 'coin',
     units:{
       full: {
-        displayScale: 6,
+        displayScale: 8,
         displayCode: 'BCH'
       },
       mili: {
-        displayScale: 3,
+        displayScale: 5,
         displayCode: 'mBCH'
       }
     }
@@ -65,11 +65,11 @@ const CRYPTO_CURRENCIES = [
     type: 'coin',
     units:{
       full: {
-        displayScale: 6,
+        displayScale: 8,
         displayCode: 'DASH'
       },
       mili: {
-        displayScale: 3,
+        displayScale: 5,
         displayCode: 'mDASH'
       }
     }
@@ -86,11 +86,11 @@ const CRYPTO_CURRENCIES = [
     type: 'coin',
     units:{
       full: {
-        displayScale: 6,
+        displayScale: 18,
         displayCode: 'ETH'
       },
       mili: {
-        displayScale: 3,
+        displayScale: 15,
         displayCode: 'mETH'
       }
     }
@@ -107,11 +107,11 @@ const CRYPTO_CURRENCIES = [
     type: 'coin',
     units:{
       full: {
-        displayScale: 6,
+        displayScale: 8,
         displayCode: 'LTC'
       },
       mili: {
-        displayScale: 3,
+        displayScale: 5,
         displayCode: 'mLTC'
       }
     }
@@ -126,10 +126,6 @@ const CRYPTO_CURRENCIES = [
       full: {
         displayScale: 6,
         displayCode: 'USDT'
-      },
-      mili: {
-        displayScale: 3,
-        displayCode: 'mUSDT'
       }
     }
   },
@@ -145,11 +141,11 @@ const CRYPTO_CURRENCIES = [
     type: 'coin',
     units:{
       full: {
-        displayScale: 6,
+        displayScale: 8,
         displayCode: 'ZEC'
       },
       mili: {
-        displayScale: 3,
+        displayScale: 5,
         displayCode: 'mZEC'
       }
     }
