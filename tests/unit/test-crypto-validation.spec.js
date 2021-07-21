@@ -85,6 +85,15 @@ test('Should validate BTC bech32', () => {
   expect(validatedTest).toBe(true)
 })
 
+test('Should validate BTC bech32m', () => {
+  const mainNetaddr = 'bc1p0xlxvlhemja6c4dqv22uapctqupfhlxm9h8z3k2e72q4k9hcz7vqzk5jj0'
+  const testNetaddr = 'tb1pqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesf3hn0c'
+  const validatedMain = cryptoValidator.bech32mValidator('main', mainNetaddr, BTC.bech32Opts)
+  const validatedTest = cryptoValidator.bech32mValidator('test', testNetaddr, BTC.bech32Opts)
+  expect(validatedMain).toBe(true)
+  expect(validatedTest).toBe(true)
+})
+
 test('Should validate LTC bech32', () => {
   const mainNetaddr = 'ltc1qnfu0fj4m528pt84jpxl8daz2mf7n0xdmxunm25'
   const testNetaddr = 'tltc1qfnpm6sdx9q6pse7rx9l3050fhrsevdg2mny4zg'
@@ -97,8 +106,8 @@ test('Should validate LTC bech32', () => {
 test('Should validate ZEC bech32', () => {
   const mainNetaddr = 'zs1kpat3qseujnnukms9yjkx7w3kgzev7jxhauc6cy2s3mupmvsvkvw04u3s35sffmv57leznctn5h'
   const testNetaddr = 'ztestsapling1kdp74adyfsmm9838jaupgfyx3npgw8ut63stjjx757pc248cuc0ymzphqeux60c64qe5qt68ygh'
-  const validatedMain = cryptoValidator.bech32Validator('main', mainNetaddr, ZEC.bech32Opts)
-  const validatedTest = cryptoValidator.bech32Validator('test', testNetaddr, ZEC.bech32Opts)
+  const validatedMain = cryptoValidator.zecBech32Validator('main', mainNetaddr, ZEC.bech32Opts)
+  const validatedTest = cryptoValidator.zecBech32Validator('test', testNetaddr, ZEC.bech32Opts)
   expect(validatedMain).toBe(true)
   expect(validatedTest).toBe(true)
 })

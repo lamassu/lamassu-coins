@@ -1,8 +1,8 @@
 const _ = require('lodash/fp')
 const bs58check = require('bs58check')
-const bech32 = require('bech32')
+const { bech32, bech32m } = require('bech32')
 
-module.exports = { base58Validator, bech32Validator, isBech32Address, zecBech32Validator }
+module.exports = { base58Validator, bech32mValidator, bech32Validator, isBech32Address, zecBech32Validator }
 
 function validatePrefix(prefix, buf) {
   for (let prefixIndex = 0; prefixIndex < prefix.length; prefixIndex++) {
@@ -33,6 +33,32 @@ function base58Validator (network, address, opts) {
     console.log('Failed to decode base58 address:', error.message)
     return false
   }
+}
+
+function bech32mValidator (network, address, opts) {
+  let decoded
+  try {
+    decoded = bech32m.decode(address)
+  } catch (error) {
+    console.log('Failed to decode bech32m address')
+    return false
+  }
+
+  const witnessVersion = decoded.words[0]
+  if (witnessVersion < 1 || witnessVersion > 16) {
+    console.log('Unsupported witness version for bech32m')
+    return false
+  }
+
+  const data = bech32m.fromWords(decoded.words.slice(1))	
+  if (data.length < 2 || data.length > 40) {	
+    console.log(`Invalid bech32m address length: ${data.length}`)	
+    return false	
+  }
+
+  if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
+  if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
+  return false
 }
 
 function bech32Validator (network, address, opts) {
