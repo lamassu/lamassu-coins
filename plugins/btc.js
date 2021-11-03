@@ -2,7 +2,7 @@ const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
 const base58Validator = require('./validators').base58Validator
 const bech32Validator = require('./validators').bech32Validator
-const base58mValidator = require('./validators').bech32mValidator
+const bech32mValidator = require('./validators').bech32mValidator
 
 const base58Opts = {
   bufferLength: 21,
@@ -53,7 +53,7 @@ function formatAddress (address) {
 function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
-  if (base58mValidator(network, address, base58Opts)) return true
+  if (bech32mValidator(network, address, base58Opts)) return true
   if (base58Validator(network, address, base58Opts)) return true
   if (bech32Validator(network, address, bech32Opts)) return true
   return false
