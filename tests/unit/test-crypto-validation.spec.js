@@ -2,6 +2,7 @@ const cryptoValidator = require('../../plugins/validators')
 const BTC = require('../../plugins/btc')
 const LTC = require('../../plugins/ltc')
 const DASH = require('../../plugins/dash')
+const XMR = require('../../plugins/xmr')
 const ZEC = require('../../plugins/zec')
 
 test('Should validate BTC P2PKH', () => {
@@ -108,6 +109,15 @@ test('Should validate ZEC bech32', () => {
   const testNetaddr = 'ztestsapling1kdp74adyfsmm9838jaupgfyx3npgw8ut63stjjx757pc248cuc0ymzphqeux60c64qe5qt68ygh'
   const validatedMain = cryptoValidator.zecBech32Validator('main', mainNetaddr, ZEC.bech32Opts)
   const validatedTest = cryptoValidator.zecBech32Validator('test', testNetaddr, ZEC.bech32Opts)
+  expect(validatedMain).toBe(true)
+  expect(validatedTest).toBe(true)
+})
+
+test('Should validate XMR address', () => {
+  const mainNetaddr = '48AUrdCdtDSQ5szeyrKg2Efha5x43uYQgbe1De8nk3WheKxLRiZ1K8YMy4j1sJPoMbVZfXp8GiSNggRV8bnGfr6x9bLdWJL'
+  const testNetaddr = '9ydhoBD4fKt3Drnuwsh7kD4duNCRXw6Yk8DAZKGCsqDR1iRYbjshL1C6hxrH5urrXKPYoRKc49uAsfkDDucrFhutCKqPGY1'
+  const validatedMain = cryptoValidator.xmrValidator('main', mainNetaddr, XMR.opts)
+  const validatedTest = cryptoValidator.xmrValidator('test', testNetaddr, XMR.opts)
   expect(validatedMain).toBe(true)
   expect(validatedTest).toBe(true)
 })

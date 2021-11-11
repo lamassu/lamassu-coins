@@ -1,8 +1,11 @@
 const _ = require('lodash/fp')
 const bs58check = require('bs58check')
 const { bech32, bech32m } = require('bech32')
+const keccak256 = require('keccak256')
 
-module.exports = { base58Validator, bech32mValidator, bech32Validator, isBech32Address, zecBech32Validator }
+const cnBase58 = require('./crypto/cnbase58')
+
+module.exports = { base58Validator, bech32mValidator, bech32Validator, isBech32Address, zecBech32Validator, xmrValidator }
 
 function validatePrefix(prefix, buf) {
   for (let prefixIndex = 0; prefixIndex < prefix.length; prefixIndex++) {
@@ -109,4 +112,30 @@ function zecBech32Validator (network, address, opts) {
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
   if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
   return false
+}
+
+function xmrValidator (network, address, opts) {
+  const keccak256Checksum = payload =>
+    keccak256(Buffer.from(payload)).toString('hex').substr(0, 8)
+  
+  const hexToBin = hex => {
+    if (hex.length % 2 !== 0) return null
+    var res = new Uint8Array(hex.length / 2)
+    for (var i = 0; i < hex.length / 2; ++i) {
+      res[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16)
+    }
+    return res
+  }
+
+  try {
+    const decoded = cnBase58.decode(address)
+    const addrChecksum = decoded.slice(-8)
+    const hashChecksum = keccak256Checksum(hexToBin(decoded.slice(0, -8)))
+    if (network === 'main' && _.startsWith(opts.mainNetPrefix, decoded) && addrChecksum === hashChecksum) return true
+    if (network === 'test' && _.startsWith(opts.testNetPrefix, decoded) && addrChecksum === hashChecksum) return true
+    return false
+  } catch (err) {
+    console.log('Failed to decode XMR address')
+    return false
+  }
 }

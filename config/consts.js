@@ -7,7 +7,8 @@ const COINS = {
   ETH: 'ETH',
   LTC: 'LTC',
   ZEC: 'ZEC',
-  USDT: 'USDT'
+  USDT: 'USDT',
+  XMR: 'XMR'
 }
 
 const CRYPTO_CURRENCIES = [
@@ -84,6 +85,21 @@ const CRYPTO_CURRENCIES = [
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     type: 'erc-20',
     displayCode: 'USDT'
+  },
+  {
+    cryptoCode: COINS.XMR,
+    display: 'Monero',
+    code: 'monero',
+    configFile: 'monero.conf',
+    daemon: 'monerod',
+    wallet: 'monero-wallet-rpc',
+    defaultPort: 38081,
+    walletPort: 38083,
+    unitScale: 12,
+    displayScale: 9,
+    zeroConf: true,
+    type: 'coin',
+    displayCode: 'mXMR'
   },
   {
     cryptoCode: COINS.ZEC,
