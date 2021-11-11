@@ -8,8 +8,9 @@ const ZEC = require('./plugins/zec')
 const LTC = require('./plugins/ltc')
 const DASH = require('./plugins/dash')
 const BCH = require('./plugins/bch')
+const XMR = require('./plugins/xmr')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH }
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
