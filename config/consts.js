@@ -140,10 +140,18 @@ const CRYPTO_CURRENCIES = [
     defaultPort: 38081,
     walletPort: 38083,
     unitScale: 12,
-    displayScale: 9,
     zeroConf: true,
     type: 'coin',
-    displayCode: 'mXMR'
+    units: {
+      full: {
+        displayScale: 12,
+        displayCode: 'XMR'
+      },
+      mili: {
+        displayScale: 9,
+        displayCode: 'mXMR'
+      }
+    }
   },
   {
     cryptoCode: COINS.ZEC,
