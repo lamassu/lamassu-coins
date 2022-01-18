@@ -119,7 +119,7 @@ const CRYPTOS = [
   },
   {
     cryptoCode: COINS.USDT,
-    display: 'Tether',
+    display: 'USDT',
     code: 'tether',
     unitScale: 6,
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
