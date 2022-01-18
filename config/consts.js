@@ -11,7 +11,7 @@ const COINS = {
   XMR: 'XMR'
 }
 
-const CRYPTO_CURRENCIES = [
+const CRYPTOS = [
   {
     cryptoCode: COINS.BTC,
     display: 'Bitcoin',
@@ -120,6 +120,7 @@ const CRYPTO_CURRENCIES = [
   {
     cryptoCode: COINS.USDT,
     display: 'USDT',
+    code: 'tether',
     unitScale: 6,
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     type: 'erc-20',
@@ -175,6 +176,8 @@ const CRYPTO_CURRENCIES = [
     }
   }
 ]
+
+const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
 
 const ALL_CRYPTOS = _.keys(COINS)
 
