@@ -39,7 +39,7 @@ const CRYPTOS = [
     code: 'bitcoincash',
     configFile: 'bitcoincash.conf',
     daemon: 'bitcoincashd',
-    defaultPort: 8335,
+    defaultPort: 8336,
     unitScale: 8,
     zeroConf: true,
     type: 'coin',
