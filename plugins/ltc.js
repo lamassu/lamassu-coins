@@ -1,6 +1,7 @@
 const _ = require('lodash/fp')
 const base58Validator = require('./validators').base58Validator
 const bech32Validator = require('./validators').bech32Validator
+const bitcoin = require('bitcoinjs-lib')
 
 const base58Opts = {
   bufferLength: 21,
@@ -39,10 +40,34 @@ function validate (network, address) {
   return false
 }
 
+function createWallet () {
+  // Network definition based on:
+  // https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/addresses.spec.ts
+  const LITECOIN = {
+    messagePrefix: '\x19Litecoin Signed Message:\n',
+    bech32: 'ltc',
+    bip32: {
+      public: 0x019da462,
+      private: 0x019d9cfe,
+    },
+    pubKeyHash: 0x30,
+    scriptHash: 0x32,
+    wif: 0xb0,
+  }
+  const keyPair = bitcoin.ECPair.makeRandom({ network: LITECOIN })
+  const segwitAddr = bitcoin.payments.p2wpkh({ pubkey: keyPair.publicKey, network: LITECOIN })
+
+  return {
+    publicAddress: segwitAddr.address,
+    privateKey: keyPair.toWIF()
+  }
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
   base58Opts,
-  bech32Opts
+  bech32Opts,
+  createWallet
 }
