@@ -2,7 +2,6 @@
   "name": "lamassu-coins",
   "version": "1.0.0",
   "dependencies": {
-    "@dashevo/dashcore-lib": "^0.19.29",
     "bech32": "2.0.0",
     "big-integer": "^1.6.48",
     "bignumber.js": "^9.0.0",
