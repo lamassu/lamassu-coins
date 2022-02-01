@@ -2,8 +2,6 @@ const url = require('url')
 const CryptoJS = require('crypto-js')
 const _sha3 = require('crypto-js/sha3')
 const ICAP = require('ethereumjs-icap')
-// Machines running on node6 don't support this lib
-// const ethWallet = require('ethereumjs-wallet').default
 
 function depositUrl (address, amount) {
   return `ethereum:${address}?amount=${amount}`
@@ -63,18 +61,8 @@ function isChecksumAddress (address) {
   return true
 }
 
-// function createWallet () {
-//   let addressData = ethWallet.generate()
-
-//   return {
-//     publicAddress: addressData.getAddressString(),
-//     privateKey: addressData.getPrivateKeyString()
-//   }
-// }
-
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl
-  // createWallet
 }

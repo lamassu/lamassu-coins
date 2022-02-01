@@ -1,7 +1,5 @@
 const _ = require('lodash/fp')
 const base58Validator = require('./validators').base58Validator
-// Machines running on node6 don't support this lib
-// const { PrivateKey } = require('@dashevo/dashcore-lib')
 
 const base58Opts = {
   bufferLength: 21,
@@ -34,19 +32,9 @@ function validate (network, address) {
   return false
 }
 
-// function createWallet() {
-//   const privateKey = new PrivateKey()
-//   const address = privateKey.toAddress().toString()
-//   return {
-//     publicAddress: address,
-//     privateKey: privateKey.toWIF()
-//   }
-// }
-
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
   base58Opts
-  // createWallet
 }
