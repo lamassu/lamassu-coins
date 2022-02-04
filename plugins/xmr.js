@@ -3,8 +3,12 @@ const _ = require('lodash/fp')
 const { xmrValidator } = require('./validators')
 
 const opts = {
-  mainNetPrefix: '12',
-  testNetPrefix: '35'
+  mainNetPublicAddrPrefix: '12',
+  mainNetIntegratedAddrPrefix: '13',
+  mainNetSubAddrPrefix: '2a',
+  testNetPublicAddrPrefix: '35',
+  testNetIntegratedAddrPrefix: '35',
+  testNetSubAddrPrefix: '3f'
 }
 
 function parseUrl (network, url) {
