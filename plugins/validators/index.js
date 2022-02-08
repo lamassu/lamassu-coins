@@ -131,8 +131,10 @@ function xmrValidator (network, address, opts) {
     const decoded = cnBase58.decode(address)
     const addrChecksum = decoded.slice(-8)
     const hashChecksum = keccak256Checksum(hexToBin(decoded.slice(0, -8)))
-    if (network === 'main' && _.startsWith(opts.mainNetPrefix, decoded) && addrChecksum === hashChecksum) return true
-    if (network === 'test' && _.startsWith(opts.testNetPrefix, decoded) && addrChecksum === hashChecksum) return true
+    const matchesMainNetPrefix = _.startsWith(opts.mainNetPublicAddrPrefix, decoded) || _.startsWith(opts.mainNetIntegratedAddrPrefix, decoded) || _.startsWith(opts.mainNetSubAddrPrefix, decoded)
+    const matchesTestNetPrefix = _.startsWith(opts.testNetPublicAddrPrefix, decoded) || _.startsWith(opts.testNetIntegratedAddrPrefix, decoded) || _.startsWith(opts.testNetSubAddrPrefix, decoded)
+    if (network === 'main' && matchesMainNetPrefix && addrChecksum === hashChecksum) return true
+    if (network === 'test' && matchesTestNetPrefix && addrChecksum === hashChecksum) return true
     return false
   } catch (err) {
     console.log('Failed to decode XMR address')
