@@ -1,5 +1,6 @@
 const cashaddr = require('cashaddrjs')
 const _ = require('lodash/fp')
+const { PrivateKey } = require('bitcore-lib-cash')
 
 const NETWORK_PREFIX = {'main': 'bitcoincash:', 'test': 'bchtest:'}
 
@@ -44,9 +45,21 @@ function formatAddress (address) {
   return address
 }
 
+
+function createWallet() {
+  const privateKey = new PrivateKey()
+  const address = privateKey.toAddress().toString()
+
+  return {
+    publicAddress: address,
+    privateKey: privateKey.toWIF()
+  }
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
-  formatAddress
+  formatAddress,
+  createWallet
 }
