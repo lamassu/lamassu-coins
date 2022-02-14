@@ -35,7 +35,7 @@ function erc20Tokens () {
 }
 
 function isErc20Token (cryptoCode) {
-  return !!getErc20Token(cryptoCode)
+  return getCryptoCurrency(cryptoCode).type === 'erc-20'
 }
 
 function buildUrl (cryptoCode, address) {
