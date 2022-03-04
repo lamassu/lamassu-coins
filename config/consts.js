@@ -7,7 +7,7 @@ const COINS = {
   ETH: 'ETH',
   LTC: 'LTC',
   ZEC: 'ZEC',
-  USDT: 'USDT',
+  // USDT: 'USDT',
   XMR: 'XMR'
 }
 
@@ -117,20 +117,20 @@ const CRYPTOS = [
       }
     }
   },
-  {
-    cryptoCode: COINS.USDT,
-    display: 'USDT',
-    code: 'tether',
-    unitScale: 6,
-    contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    type: 'erc-20',
-    units:{
-      full: {
-        displayScale: 6,
-        displayCode: 'USDT'
-      }
-    }
-  },
+  // {
+  //   cryptoCode: COINS.USDT,
+  //   display: 'USDT',
+  //   code: 'tether',
+  //   unitScale: 6,
+  //   contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  //   type: 'erc-20',
+  //   units:{
+  //     full: {
+  //       displayScale: 6,
+  //       displayCode: 'USDT'
+  //     }
+  //   }
+  // },
   {
     cryptoCode: COINS.XMR,
     display: 'Monero',
