@@ -10,8 +10,9 @@ const DASH = require('./plugins/dash')
 const BCH = require('./plugins/bch')
 const XMR = require('./plugins/xmr')
 const TRX = require('./plugins/trx')
+const LN = require('./plugins/ln')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX }
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
@@ -140,7 +141,7 @@ function getAddressType (cryptoCode, address, network) {
 }
 
 function getEquivalentCode (cryptoCurrency) {
-  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT' }
+  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT', LN: 'BTC' }
 
   return PEGGED_CRYPTO_CURRENCIES[cryptoCurrency] || cryptoCurrency
 }
