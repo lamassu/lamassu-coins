@@ -222,7 +222,7 @@ const CRYPTOS = [
   },
   {
     cryptoCode: COINS.LN,
-    display: 'Lighting Network',
+    display: 'Lightning Network',
     code: 'ln',
     configFile: null,
     daemon: null,
