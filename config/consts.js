@@ -8,7 +8,8 @@ const COINS = {
   LTC: 'LTC',
   ZEC: 'ZEC',
   // USDT: 'USDT',
-  XMR: 'XMR'
+  XMR: 'XMR',
+  LN: 'LN'
 }
 
 const CRYPTOS = [
@@ -174,7 +175,28 @@ const CRYPTOS = [
         displayCode: 'mZEC'
       }
     }
-  }
+  },
+  {
+    cryptoCode: COINS.LN,
+    display: 'Lighting Network',
+    code: 'ln',
+    configFile: null,
+    daemon: null,
+    defaultPort: null,
+    unitScale: 8,
+    zeroConf: true,
+    type: 'coin',
+    units:{
+      full: {
+        displayScale: 8,
+        displayCode: 'BTC'
+      },
+      mili: {
+        displayScale: 5,
+        displayCode: 'mBTC'
+      }
+    }
+  },
 ]
 
 const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
