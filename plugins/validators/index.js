@@ -72,6 +72,12 @@ function bech32Validator (network, address, opts, limit) {
     console.log('Failed to decode bech32 address')
     return false
   }
+  // LN invoice
+  if(limit) {
+    if (network === 'main' && decoded.prefix.substr(0, 4) === opts.mainNetPrefix) return true
+    if (network === 'test' && decoded.prefix.substr(0, 4) === opts.testNetPrefix) return true
+    return false
+  }
 
   const witnessVersion = decoded.words[0]
   if (witnessVersion !== 0) {

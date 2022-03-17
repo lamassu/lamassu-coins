@@ -13,11 +13,12 @@ const EXTERNAL_CRYPTO_CODE = 'BTC'
 function parseUrl (network, url) {
   const urlElements = _.split('?', url)
 
-  // Handle address type: bitcoin:bc1(...)?amount=0.00035?lightning=lnbc8(...)
+  // Handle address type: bitcoin:bc1(...)?amount=0.00035?lightning=lnbc(...)
   if(_.size(urlElements) === 3) {
     const lightningParameter = urlElements[2]
     const invoice = _.split('=', lightningParameter)[1]
     if (!validate(network, invoice)) throw new Error('Invalid address')
+    return invoice
   }
 
   const res = /^(\w+:)?(\w+)/i.exec(url)
