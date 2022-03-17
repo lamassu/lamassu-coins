@@ -75,10 +75,10 @@ function bech32mValidator (network, address, opts) {
   return false
 }
 
-function bech32Validator (network, address, opts) {
+function bech32Validator (network, address, opts, limit) {
   let decoded
   try {
-    decoded = bech32.decode(address)
+    decoded = bech32.decode(address, limit)
   } catch (error) {
     console.log('Not a bech32 address')
     return false
