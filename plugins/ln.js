@@ -41,7 +41,7 @@ function buildUrl (address) {
 function depositUrl (address, amount) {
   const urlElements = _.split('?', address)
 
-  if(_.size(urlElements) === 3) {
+  if(_.size(urlElements) === 2) {
     return address
   }
 
