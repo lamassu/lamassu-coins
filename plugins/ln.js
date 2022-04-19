@@ -11,11 +11,12 @@ const bech32Opts = {
 const EXTERNAL_CRYPTO_CODE = 'BTC'
 
 function parseUrl (network, url) {
-  const urlElements = _.split('?', url)
+  const urlElements = _.split('?', url);
+  const lnInvoiceElements = _.split('&', urlElements[1])
 
-  // Handle address type: bitcoin:bc1(...)?amount=0.00035?lightning=lnbc(...)
-  if(_.size(urlElements) === 3) {
-    const lightningParameter = urlElements[2]
+  // Handle address type: bitcoin:bc1(...)?amount=0.00035&lightning=lnbc(...)
+  if(_.size(urlElements) === 2 && _.size(lnInvoiceElements) === 2) {
+    const lightningParameter = lnInvoiceElements[1]
     const invoice = _.split('=', lightningParameter)[1]
     if (!validate(network, invoice)) throw new Error('Invalid address')
     return invoice
