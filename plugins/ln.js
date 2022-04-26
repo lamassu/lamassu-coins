@@ -10,12 +10,12 @@ const bech32Opts = {
 
 function parseUrl (network, url) {
   const urlElements = _.split('?', url);
-  const lnInvoiceElements = _.split('&', urlElements[1])
 
   // Handle address type: bitcoin:bc1(...)?amount=0.00035&lightning=lnbc(...)
-  if(_.size(urlElements) === 2 && _.size(lnInvoiceElements) === 2) {
-    const lightningParameter = lnInvoiceElements[1]
-    const invoice = _.split('=', lightningParameter)[1]
+  if(_.size(urlElements) === 2) {
+    const lnElements = _.split('&', urlElements[1])
+    const parameters = _.fromPairs(_.map(parameter => _.split('=', parameter) , lnElements))
+    const invoice = parameters.lightning
     if (!validate(network, invoice)) throw new Error('Invalid address')
     return invoice
   }
@@ -25,7 +25,7 @@ function parseUrl (network, url) {
 
   console.log('DEBUG16: [%s] *%s*', network, address)
 
-  if(address.substr(0, 2) === 'ln') {
+  if(res[1] === 'lightning:') {
     if (!validate(network, address)) throw new Error('Invalid address')
   } else {
     if (!btc.validate(network, address)) throw new Error('Invalid address')
@@ -65,8 +65,7 @@ function formatAddress (address) {
 function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
-  if (bech32Validator(network, address, bech32Opts, Number.MAX_SAFE_INTEGER)) return true
-  return false
+  return bech32Validator(network, address, bech32Opts, Number.MAX_SAFE_INTEGER)
 }
 
 function createWallet () {
