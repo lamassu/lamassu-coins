@@ -64,12 +64,18 @@ function bech32mValidator (network, address, opts) {
   return false
 }
 
-function bech32Validator (network, address, opts) {
+function bech32Validator (network, address, opts, limit) {
   let decoded
   try {
-    decoded = bech32.decode(address)
+    decoded = bech32.decode(address, limit)
   } catch (error) {
     console.log('Failed to decode bech32 address')
+    return false
+  }
+  // LN invoice
+  if(limit) {
+    if (network === 'main' && decoded.prefix.substr(0, 4) === opts.mainNetPrefix) return true
+    if (network === 'test' && decoded.prefix.substr(0, 4) === opts.testNetPrefix) return true
     return false
   }
 

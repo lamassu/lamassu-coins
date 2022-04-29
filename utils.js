@@ -9,8 +9,9 @@ const LTC = require('./plugins/ltc')
 const DASH = require('./plugins/dash')
 const BCH = require('./plugins/bch')
 const XMR = require('./plugins/xmr')
+const LN = require('./plugins/ln')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR }
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, LN }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
@@ -102,6 +103,12 @@ function createWallet (cryptoCode) {
   return plugin.createWallet()
 }
 
+function getExternalCryptoCode(cryptoCode) {
+  const plugin = coinPlugin(cryptoCode)
+  if (!plugin.getExternalCryptoCode) return cryptoCode
+  return plugin.getExternalCryptoCode()
+}
+
 module.exports = {
   buildUrl,
   cryptoDir,
@@ -117,5 +124,6 @@ module.exports = {
   parseUrl,
   formatAddress,
   formatAddressCasing,
-  createWallet
+  createWallet,
+  getExternalCryptoCode
 }

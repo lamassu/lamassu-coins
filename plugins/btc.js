@@ -76,5 +76,6 @@ module.exports = {
   formatAddress,
   base58Opts,
   bech32Opts,
-  createWallet
+  createWallet,
+  validate
 }
