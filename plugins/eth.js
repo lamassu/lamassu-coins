@@ -14,8 +14,8 @@ function parseUrl (network, uri) {
       var icap = rec.host.toUpperCase()
       return ICAP.toAddress(icap)
     }
-
-    var address = rec.path || rec.host
+    // auth stores the address for this metamask edge case: `ethereum:0xABCD@1`
+    var address = rec.auth || rec.path || rec.host
     if (address && isValidAddress(address)) return address
 
     return null
