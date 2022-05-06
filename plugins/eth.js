@@ -16,7 +16,7 @@ function parseUrl (network, uri) {
     }
 
     if(rec.protocol === 'ethereum:') {
-      // auth stores the address for the metamask edge case: `ethereum:0xABCD@1(...)`
+      // auth stores the address for the metamask edge case: `ethereum:0xABCD@1`
       var address = rec.auth
       if (address && isValidAddress(address)) return address
     }
