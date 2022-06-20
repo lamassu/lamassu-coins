@@ -7,12 +7,14 @@ const bech32mValidator = require('./validators').bech32mValidator
 const base58Opts = {
   bufferLength: 21,
   mainNetPrefix: [ [0x00], [0x05] ],
-  testNetPrefix: [ [0x6f], [0xc4] ]
+  testNetPrefix: [ [0x6f], [0xc4] ],
+  regtestPrefix: [ [0x6f], [0xc4] ]
 }
 
 const bech32Opts = {
   mainNetPrefix: 'bc',
-  testNetPrefix: 'tb'
+  testNetPrefix: 'tb',
+  regtestPrefix: 'bcrt'
 }
 
 function parseUrl (network, url) {

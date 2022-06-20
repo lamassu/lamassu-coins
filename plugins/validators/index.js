@@ -29,6 +29,7 @@ function base58Validator (network, address, opts) {
 
     if (network === 'main' && validatePrefix(opts.mainNetPrefix, buf)) return true
     if (network === 'test' && validatePrefix(opts.testNetPrefix, buf)) return true
+    if (network === 'regtest' && validatePrefix(opts.regtestPrefix, buf)) return true
     console.log('Unrecognized network')
     return false
 
@@ -61,6 +62,7 @@ function bech32mValidator (network, address, opts) {
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
   if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
+  if (network === 'regtest' && decoded.prefix === opts.regtestPrefix) return true
   return false
 }
 
@@ -87,6 +89,7 @@ function bech32Validator (network, address, opts) {
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
   if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
+  if (network === 'regtest' && decoded.prefix === opts.regtestPrefix) return true
   return false
 }
 
@@ -106,7 +109,7 @@ function zecBech32Validator (network, address, opts) {
   const data = bech32.fromWords(decoded.words)	
   if (data.length !== 43) {	
     console.log(`Invalid bech32 address length: ${data.length}`)	
-    return false	
+    return false
   }
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
