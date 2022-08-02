@@ -1,6 +1,7 @@
 const _ = require('lodash/fp')
 const base58Validator = require('./validators').base58Validator
 const zecBech32Validator = require('./validators').zecBech32Validator
+const zecBech32mValidator = require('./validators').zecBech32mValidator
 
 const base58Opts = {
   bufferLength: 22,
@@ -17,6 +18,11 @@ const base58Opts = {
 const bech32Opts = {
   mainNetPrefix: 'zs',
   testNetPrefix: 'ztestsapling'
+}
+
+const bech32mOpts = {
+  mainNetPrefix: 'u',
+  testNetPrefix: 'utest'
 }
 
 function parseUrl (network, url) {
@@ -42,6 +48,7 @@ function validate (network, address) {
   if (!address) throw new Error('No address supplied.')
   if (base58Validator(network, address, base58Opts)) return true
   if (zecBech32Validator(network, address, bech32Opts)) return true
+  if (zecBech32mValidator(network, address, bech32mOpts)) return true
   return false
 }
 
@@ -50,5 +57,6 @@ module.exports = {
   parseUrl,
   buildUrl,
   base58Opts,
-  bech32Opts
+  bech32Opts,
+  bech32mOpts
 }
