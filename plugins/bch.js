@@ -56,10 +56,20 @@ function createWallet() {
   }
 }
 
+function getAddressType (address, network) {
+  try {
+    const { type } = cashaddr.decode(parseUrl(network, address))
+    return type
+  } catch (e) {
+    return null
+  }
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
   formatAddress,
-  createWallet
+  createWallet,
+  getAddressType
 }

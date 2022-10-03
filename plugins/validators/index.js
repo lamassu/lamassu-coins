@@ -39,7 +39,7 @@ function base58Validator (network, address, opts) {
     if (network === 'main' && validatePrefix(opts.mainNetPrefix, buf)) return true
     if (network === 'test' && validatePrefix(opts.testNetPrefix, buf)) return true
     if (network === 'regtest' && validatePrefix(opts.regtestPrefix, buf)) return true
-    console.log('Unrecognized network')
+    console.log('Unrecognized network:', network)
     return false
 
   } catch (error) {

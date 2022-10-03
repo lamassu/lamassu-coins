@@ -32,9 +32,16 @@ function validate (network, address) {
   return false
 }
 
+function getAddressType (address, network) {
+  const _address = parseUrl(network, address)
+  if (base58Validator(network, _address, base58Opts)) return 'P2PKH/P2SH'
+  return null
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
-  base58Opts
+  base58Opts,
+  getAddressType
 }

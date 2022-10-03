@@ -102,6 +102,11 @@ function createWallet (cryptoCode) {
   return plugin.createWallet()
 }
 
+function getAddressType (cryptoCode, address, network) {
+  const plugin = coinPlugin(cryptoCode)
+  return plugin.getAddressType(address, network)
+}
+
 module.exports = {
   buildUrl,
   cryptoDir,
@@ -117,5 +122,6 @@ module.exports = {
   parseUrl,
   formatAddress,
   formatAddressCasing,
-  createWallet
+  createWallet,
+  getAddressType
 }
