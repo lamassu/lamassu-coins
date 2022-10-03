@@ -1,6 +1,7 @@
 const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
 const btc = require('./btc')
+const invoice = require('@node-lightning/invoice')
 const bech32Validator = require('./validators').bech32Validator
 
 const bech32Opts = {
@@ -71,6 +72,8 @@ function formatAddress (address) {
 function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
+  const amount = invoice.decode(address)._value
+  if (!_.isNil(amount)) throw new Error('Non-zero amount invoice supplied.')
   return bech32Validator(network, address, bech32Opts, lengthLimit)
 }
 

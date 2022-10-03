@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "dependencies": {
     "bech32": "2.0.0",
+    "@node-lightning/invoice": "0.22.1",
     "big-integer": "^1.6.48",
     "bignumber.js": "^9.0.0",
     "bitcoinjs-lib": "4.0.3",
