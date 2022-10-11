@@ -2,17 +2,6 @@ const _ = require('lodash/fp')
 const utils = require('../../utils')
 const { ALL_CRYPTOS } = require('../../config/consts')
 
-const addressConversions = [
-  {
-    from: {
-      coin: 'BTC', format: ''
-    },
-    to: {
-      coin: 'BCH', format: ''
-    }
-  }
-]
-
 const NETWORKS = ['main', 'test', 'regtest']
 
 function detectAddress (address) {

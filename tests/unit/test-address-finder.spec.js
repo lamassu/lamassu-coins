@@ -3,37 +3,6 @@ const _ = require('lodash/fp')
 const detector = require('../../plugins/detector')
 
 test('Should match all addresses', () => {
-  const addresses = [
-    '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2',
-    'mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn',
-    '3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy',
-    '2MzQwSSnBHWHqSAqtTVQ6v47XtaisrJa1Vc',
-    'LVdPgVLae4mTeAdywWqmwWkJypAGcRkHy3',
-    'mhLpXMH9EGV7xFRg5gjKXFpoxaer7ehEeW',
-    'ME7LnTc1rEdtiuSqJ2VivGJUWNPB7yS8fB',
-    'QSv2w3XpTPwSjZoQHjNxzebXXVH2Feaoke',
-    'XuvPuKz7JPkyzWn8g7PNLjYVNdouedLc56',
-    'yh1csSCnZNRLqBgzHFUMVTHaW4TU74K28R',
-    '7Z5BvydGVzgbX9xqWEb1JtF9TkToG8htcV',
-    '8ik6MdU1RprCq6YtTsHNkg8biMxZUyXo8q',
-    't1ZYZS6ynUDbvht7vH3dMiM3rsAJ1p6EGWC',
-    'tmKBPqa8qqKA7vrGq1AaXHSAr9vqa3GczzK',
-    't3f3T3nCWsEpzmD35VK62JgQfFig74dV8C9',
-    't295qeRQc3xhzgf7HQYLh3du7uWyrLmtQf6',
-    'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq',
-    'tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx',
-    'bc1p0xlxvlhemja6c4dqv22uapctqupfhlxm9h8z3k2e72q4k9hcz7vqzk5jj0',
-    'tb1pqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesf3hn0c',
-    'ltc1qnfu0fj4m528pt84jpxl8daz2mf7n0xdmxunm25',
-    'tltc1qfnpm6sdx9q6pse7rx9l3050fhrsevdg2mny4zg',
-    'zs1kpat3qseujnnukms9yjkx7w3kgzev7jxhauc6cy2s3mupmvsvkvw04u3s35sffmv57leznctn5h',
-    'ztestsapling1kdp74adyfsmm9838jaupgfyx3npgw8ut63stjjx757pc248cuc0ymzphqeux60c64qe5qt68ygh',
-    '48AUrdCdtDSQ5szeyrKg2Efha5x43uYQgbe1De8nk3WheKxLRiZ1K8YMy4j1sJPoMbVZfXp8GiSNggRV8bnGfr6x9bLdWJL',
-    '9ydhoBD4fKt3Drnuwsh7kD4duNCRXw6Yk8DAZKGCsqDR1iRYbjshL1C6hxrH5urrXKPYoRKc49uAsfkDDucrFhutCKqPGY1',
-    'u1d32rw7pl54duptrfn462jkhd0y5lsvjgpx7kx9hggma70gmkzya0whex6twl0kt2d6ga4yxht5x5sxtvpu60yr2wsf6eklxxx0lggpz3davc5xxq8lt8en25zzmgc0ms472vjswfg2rfs6v03pavaz3n7a92r77fw5a32zza0e4vfgqn9p7epzvmkn8w6scj0rjky0u36w4wwcayykw',
-    'utest1rkfkugmd87wtn3rqrzx5agp8rhzf7hnz4tkfuzn0kvsrdhq38jrkyy4t098m54rjulrw54r26am7jn2mhctdczvanr08tayaklu6jm38hzf3gyl6wut8gmd6445eph5gztg2z20g6r4retdcf65ufsklsrec8vuvul23h5mz2dnyx0p4q09t624ajt3wyckx4caykft09z30ygl2tf9'
-  ]
-  const result = _.map(it => detector.detectAddress(it), addresses)
   const expected = [
     {
       address: '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2',
@@ -362,6 +331,9 @@ test('Should match all addresses', () => {
       ]
     }
   ]
+  
+  const addresses = _.map(it => it.address, expected)
+  const result = _.map(it => detector.detectAddress(it), addresses)
 
   expect(result).toStrictEqual(expected)
 })
