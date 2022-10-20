@@ -96,8 +96,8 @@ function bech32Validator (network, address, opts, limit) {
   return false
 }
 
-function isBech32Address (address, opts) {
-  return bech32Validator('main', address, opts) || bech32Validator('test', address, opts)
+function isBech32Address (address, opts, lengthLimit) {
+  return bech32Validator('main', address, opts, lengthLimit) || bech32Validator('test', address, opts, lengthLimit)
 }
 
 function zecBech32Validator (network, address, opts) {

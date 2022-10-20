@@ -1,12 +1,15 @@
 const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
 const btc = require('./btc')
+var invoice = require('bolt11')
 const bech32Validator = require('./validators').bech32Validator
 
 const bech32Opts = {
   mainNetPrefix: 'lnbc',
   testNetPrefix: 'lntb'
 }
+
+const lengthLimit = Number.MAX_SAFE_INTEGER
 
 const EXTERNAL_CRYPTO_CODE = 'BTC'
 
@@ -27,7 +30,9 @@ function parseUrl (network, url) {
 
   console.log('DEBUG16: [%s] *%s*', network, address)
 
-  if(res[1] === 'lightning:') {
+  const prefix = address.substr(0, 2)
+
+  if(res[1] === 'lightning:' || prefix === 'ln' || prefix === 'LN') {
     if (!validate(network, address)) throw new Error('Invalid address')
   } else {
     if (!btc.validate(network, address)) throw new Error('Invalid address')
@@ -67,7 +72,9 @@ function formatAddress (address) {
 function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
-  return bech32Validator(network, address, bech32Opts, Number.MAX_SAFE_INTEGER)
+  const amount = invoice.decode(address).millisatoshis
+  if (!_.isNil(amount)) throw new Error('Non-zero amount invoice supplied.')
+  return bech32Validator(network, address, bech32Opts, lengthLimit)
 }
 
 function createWallet () {
@@ -90,6 +97,7 @@ module.exports = {
   buildUrl,
   formatAddress,
   bech32Opts,
+  lengthLimit,
   createWallet,
   getExternalCryptoCode
 }
