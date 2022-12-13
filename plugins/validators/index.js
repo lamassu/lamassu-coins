@@ -43,7 +43,7 @@ function base58Validator (network, address, opts) {
     return false
 
   } catch (error) {
-    console.log('Failed to decode base58 address:', error.message)
+    console.log('Not a base58 address:', error.message)
     return false
   }
 }
@@ -53,7 +53,7 @@ function bech32mValidator (network, address, opts) {
   try {
     decoded = bech32m.decode(address)
   } catch (error) {
-    console.log('Failed to decode bech32m address')
+    console.log('Not a bech32m address')
     return false
   }
 
@@ -80,7 +80,7 @@ function bech32Validator (network, address, opts) {
   try {
     decoded = bech32.decode(address)
   } catch (error) {
-    console.log('Failed to decode bech32 address')
+    console.log('Not a bech32 address')
     return false
   }
 
@@ -111,7 +111,7 @@ function zecBech32Validator (network, address, opts) {
   try {
     decoded = bech32.decode(address)
   } catch (error) {
-    console.log('Failed to decode bech32 address')
+    console.log('Not a bech32 address')
     return false
   }
 
@@ -142,7 +142,7 @@ function zecBech32mValidator (network, address, opts) {
     decoded = bech32m.decode(address, 512)
   } catch (error) {
     console.log('error', error)
-    console.log('Failed to decode bech32m address')
+    console.log('Not a bech32m address')
     return false
   }
 
@@ -178,7 +178,7 @@ function xmrValidator (network, address, opts) {
     if (network === 'test' && matchesTestNetPrefix && addrChecksum === hashChecksum) return true
     return false
   } catch (err) {
-    console.log('Failed to decode XMR address')
+    console.log('Not an XMR address')
     return false
   }
 }
