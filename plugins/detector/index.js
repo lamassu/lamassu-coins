@@ -4,7 +4,7 @@ const { ALL_CRYPTOS } = require('../../config/consts')
 
 const NETWORKS = ['main', 'test', 'regtest']
 
-function detectAddress (address) {
+function getSupportedCoinsForAddress (address) {
   const matches = _.reduce((acc, value) => {
     try {
       const network = _.find(it => {
@@ -31,5 +31,5 @@ function detectAddress (address) {
 }
 
 module.exports = {
-  detectAddress
+  getSupportedCoinsForAddress
 }
