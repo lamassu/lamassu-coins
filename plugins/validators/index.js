@@ -4,8 +4,17 @@ const { bech32, bech32m } = require('bech32')
 const keccak256 = require('keccak256')
 
 const cnBase58 = require('./crypto/cnbase58')
+const { f4Unjumble: reverseF4Jumble } = require('./crypto/f4jumble')
 
-module.exports = { base58Validator, bech32mValidator, bech32Validator, isBech32Address, zecBech32Validator, xmrValidator }
+module.exports = {
+  base58Validator,
+  bech32mValidator,
+  bech32Validator,
+  isBech32Address,
+  zecBech32Validator,
+  zecBech32mValidator,
+  xmrValidator
+}
 
 function validatePrefix(prefix, buf) {
   for (let prefixIndex = 0; prefixIndex < prefix.length; prefixIndex++) {
@@ -29,6 +38,7 @@ function base58Validator (network, address, opts) {
 
     if (network === 'main' && validatePrefix(opts.mainNetPrefix, buf)) return true
     if (network === 'test' && validatePrefix(opts.testNetPrefix, buf)) return true
+    if (network === 'regtest' && validatePrefix(opts.regtestPrefix, buf)) return true
     console.log('Unrecognized network')
     return false
 
@@ -61,6 +71,7 @@ function bech32mValidator (network, address, opts) {
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
   if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
+  if (network === 'regtest' && decoded.prefix === opts.regtestPrefix) return true
   return false
 }
 
@@ -93,6 +104,7 @@ function bech32Validator (network, address, opts, limit) {
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
   if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
+  if (network === 'regtest' && decoded.prefix === opts.regtestPrefix) return true
   return false
 }
 
@@ -112,11 +124,40 @@ function zecBech32Validator (network, address, opts) {
   const data = bech32.fromWords(decoded.words)	
   if (data.length !== 43) {	
     console.log(`Invalid bech32 address length: ${data.length}`)	
-    return false	
+    return false
   }
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
   if (network === 'test' && decoded.prefix === opts.testNetPrefix) return true
+  return false
+}
+
+function zecBech32mValidator (network, address, opts) {
+  const confirmPadding = (unjumbled, humanReadiblePadding) => {
+    const humanReadibleBuffer = Buffer.from(humanReadiblePadding).toString('hex')
+    const lastBytes = Buffer.from(unjumbled).toString('hex').slice(-32)
+
+    const paddingMask = '00000000000000000000000000000000'
+    const paddedRes = (humanReadibleBuffer + paddingMask).substring(0, paddingMask.length) // Buffer.padEnd is not available before ES2017 (l-m doesn't support it)
+
+    return lastBytes === paddedRes
+  }
+
+  let decoded
+  try {
+    decoded = bech32m.decode(address, 512)
+  } catch (error) {
+    console.log('error', error)
+    console.log('Failed to decode bech32m address')
+    return false
+  }
+
+  const data = bech32m.fromWords(decoded.words)
+
+  const res = reverseF4Jumble(data)
+
+  if (network === 'main' && confirmPadding(res, opts.mainNetPrefix)) return true
+  if (network === 'test' && confirmPadding(res, opts.testNetPrefix)) return true
   return false
 }
 

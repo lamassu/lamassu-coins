@@ -122,6 +122,15 @@ test('Should validate XMR address', () => {
   expect(validatedTest).toBe(true)
 })
 
+test('Should validate ZEC bech32m', () => {
+  const mainNetaddr = 'u1d32rw7pl54duptrfn462jkhd0y5lsvjgpx7kx9hggma70gmkzya0whex6twl0kt2d6ga4yxht5x5sxtvpu60yr2wsf6eklxxx0lggpz3davc5xxq8lt8en25zzmgc0ms472vjswfg2rfs6v03pavaz3n7a92r77fw5a32zza0e4vfgqn9p7epzvmkn8w6scj0rjky0u36w4wwcayykw'
+  const testNetaddr = 'utest1rkfkugmd87wtn3rqrzx5agp8rhzf7hnz4tkfuzn0kvsrdhq38jrkyy4t098m54rjulrw54r26am7jn2mhctdczvanr08tayaklu6jm38hzf3gyl6wut8gmd6445eph5gztg2z20g6r4retdcf65ufsklsrec8vuvul23h5mz2dnyx0p4q09t624ajt3wyckx4caykft09z30ygl2tf9'
+  const validatedMain = cryptoValidator.zecBech32mValidator('main', mainNetaddr, ZEC.bech32mOpts)
+  const validatedTest = cryptoValidator.zecBech32mValidator('test', testNetaddr, ZEC.bech32mOpts)
+  expect(validatedMain).toBe(true)
+  expect(validatedTest).toBe(true)
+})
+
 test('Should fail length validation', () => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
   const opts = BTC.base58Opts
