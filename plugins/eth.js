@@ -67,8 +67,15 @@ function isChecksumAddress (address) {
   return true
 }
 
+function getAddressType (address, network) {
+  const _address = parseUrl(network, address)
+  if (isValidAddress(_address)) return 'Regular'
+  return null
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
-  buildUrl
+  buildUrl,
+  getAddressType
 }

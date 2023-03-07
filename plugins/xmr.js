@@ -36,9 +36,16 @@ function validate (network, address) {
   return false
 }
 
+function getAddressType (address, network) {
+  const _address = parseUrl(network, address)
+  if (xmrValidator(network, _address, opts)) return 'Regular'
+  return null
+}
+
 module.exports = {
   opts,
   parseUrl,
   depositUrl,
-  buildUrl
+  buildUrl,
+  getAddressType
 }

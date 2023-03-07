@@ -63,11 +63,19 @@ function createWallet () {
   }
 }
 
+function getAddressType (address, network) {
+  const _address = parseUrl(network, address)
+  if (base58Validator(network, _address, base58Opts)) return 'P2PKH/PS2H'
+  if (bech32Validator(network, _address, bech32Opts)) return 'SegWit'
+  return null
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
   base58Opts,
   bech32Opts,
-  createWallet
+  createWallet,
+  getAddressType
 }
