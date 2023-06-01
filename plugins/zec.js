@@ -52,11 +52,20 @@ function validate (network, address) {
   return false
 }
 
+function getAddressType (address, network) {
+  const _address = parseUrl(network, address)
+  if (base58Validator(network, _address, base58Opts)) return 'Transparent'
+  if (zecBech32Validator(network, _address, bech32Opts)) return 'Shielded'
+  if (zecBech32mValidator(network, _address, bech32mOpts)) return 'Unified'
+  return null
+}
+
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
   base58Opts,
   bech32Opts,
-  bech32mOpts
+  bech32mOpts,
+  getAddressType
 }
