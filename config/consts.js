@@ -8,6 +8,7 @@ const COINS = {
   LTC: 'LTC',
   ZEC: 'ZEC',
   USDT: 'USDT',
+  USDC: 'USDC',
   XMR: 'XMR'
 }
 
@@ -128,6 +129,21 @@ const CRYPTOS = [
       full: {
         displayScale: 6,
         displayCode: 'USDT'
+      }
+    },
+    isCashinOnly: true
+  },
+  {
+    cryptoCode: COINS.USDC,
+    display: 'USDC',
+    code: 'usdc',
+    unitScale: 6,
+    contractAddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+    type: 'erc-20',
+    units:{
+      full: {
+        displayScale: 6,
+        displayCode: 'USDC'
       }
     },
     isCashinOnly: true
