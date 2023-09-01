@@ -8,7 +8,8 @@ const COINS = {
   LTC: 'LTC',
   ZEC: 'ZEC',
   USDT: 'USDT',
-  XMR: 'XMR'
+  XMR: 'XMR',
+  TRX: 'TRX'
 }
 
 const CRYPTOS = [
@@ -93,6 +94,24 @@ const CRYPTOS = [
       mili: {
         displayScale: 15,
         displayCode: 'mETH'
+      }
+    }
+  },
+  {
+    cryptoCode: COINS.TRX,
+    display: 'Tron',
+    code: 'tron',
+    unitScale: 6,
+    zeroConf: false,
+    type: 'coin',
+    units:{
+      full: {
+        displayScale: 6,
+        displayCode: 'TRX'
+      },
+      mili: {
+        displayScale: 3,
+        displayCode: 'mTRX'
       }
     }
   },

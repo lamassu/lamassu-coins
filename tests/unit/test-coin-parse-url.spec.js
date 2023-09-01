@@ -4,6 +4,7 @@ const DASH = require('../../plugins/dash')
 const ZEC = require('../../plugins/zec')
 const ETH = require('../../plugins/eth')
 const BCH = require('../../plugins/bch')
+const TRX = require('../../plugins/trx')
 
 test('Should parse BTC address', () => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
@@ -77,6 +78,21 @@ test('Should parse ETH address', () => {
 test('Should throw for invalid ETH address', () => {
   const addr = '71E23708793f83Cf8Aa72e26D31E9cd75B5691B5'
   const spy = jest.spyOn(ETH, 'parseUrl')
+  try {
+    spy('main', addr)
+  } catch (error) { }
+  expect(spy).toThrow()
+})
+
+test('Should parse TRX address', () => {
+  const addr = 'TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL'
+  const parsed = TRX.parseUrl('main', addr)
+  expect(addr).toBe(parsed)
+})
+
+test('Should throw for invalid TRX address', () => {
+  const addr = 'TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqe2'
+  const spy = jest.spyOn(TRX, 'parseUrl')
   try {
     spy('main', addr)
   } catch (error) { }
