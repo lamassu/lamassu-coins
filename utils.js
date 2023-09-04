@@ -24,10 +24,20 @@ function cryptoCurrencies () {
   return consts.CRYPTO_CURRENCIES
 }
 
+function getTrc20Token (cryptoCode) {
+  const token = _.find(['cryptoCode', cryptoCode], trc20Tokens())
+  if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
+  return token
+}
+
 function getErc20Token (cryptoCode) {
   const token = _.find(['cryptoCode', cryptoCode], erc20Tokens())
   if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
   return token
+}
+
+function trc20Tokens () {
+  return _.filter(e => e.type === 'trc-20', consts.CRYPTO_CURRENCIES)
 }
 
 function erc20Tokens () {
@@ -36,6 +46,10 @@ function erc20Tokens () {
 
 function isErc20Token (cryptoCode) {
   return getCryptoCurrency(cryptoCode).type === 'erc-20'
+}
+
+function isTrc20Token (cryptoCode) {
+  return getCryptoCurrency(cryptoCode).type === 'trc-20'
 }
 
 function buildUrl (cryptoCode, address) {
@@ -114,6 +128,8 @@ module.exports = {
   cryptoCurrencies,
   erc20Tokens,
   getCryptoCurrency,
+  getTrc20Token,
+  isTrc20Token,
   getErc20Token,
   isErc20Token,
   toUnit,

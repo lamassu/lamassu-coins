@@ -113,7 +113,23 @@ const CRYPTOS = [
         displayScale: 3,
         displayCode: 'mTRX'
       }
-    }
+    },
+    isCashinOnly: true
+  },
+  {
+    cryptoCode: COINS.USDT,
+    display: 'USDT (Tron)',
+    code: 'tether_tron',
+    unitScale: 6,
+    contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+    type: 'trc-20',
+    units:{
+      full: {
+        displayScale: 6,
+        displayCode: 'USDT (Tron)'
+      }
+    },
+    isCashinOnly: true
   },
   {
     cryptoCode: COINS.LTC,
