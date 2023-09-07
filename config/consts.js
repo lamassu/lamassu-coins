@@ -9,7 +9,8 @@ const COINS = {
   ZEC: 'ZEC',
   USDT: 'USDT',
   XMR: 'XMR',
-  TRX: 'TRX'
+  TRX: 'TRX',
+  USDT_TRON: 'USDT_TRON'
 }
 
 const CRYPTOS = [
@@ -117,11 +118,13 @@ const CRYPTOS = [
     isCashinOnly: true
   },
   {
-    cryptoCode: COINS.USDT,
+    cryptoCode: COINS.USDT_TRON,
     display: 'USDT (Tron)',
     code: 'tether_tron',
     unitScale: 6,
+    zeroConf: false,
     contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+    testnetContractAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
     type: 'trc-20',
     units:{
       full: {

@@ -9,8 +9,9 @@ const LTC = require('./plugins/ltc')
 const DASH = require('./plugins/dash')
 const BCH = require('./plugins/bch')
 const XMR = require('./plugins/xmr')
+const TRX = require('./plugins/trx')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR }
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
@@ -76,7 +77,22 @@ function formatCryptoAddress(cryptoCode = '', address = '') {
 }
 
 function coinPlugin (cryptoCode) {
-  const plugin = getCryptoCurrency(cryptoCode).type === 'coin' ? PLUGINS[cryptoCode] : PLUGINS['ETH']
+  const coin = getCryptoCurrency(cryptoCode)
+  const type = coin.type || 'coin'
+
+  let plugin = null
+  switch (type) {
+    case 'coin':
+      plugin = PLUGINS[cryptoCode]
+      break;
+    case 'erc-20':
+      plugin = PLUGINS['ETH']
+    case 'trc-20':
+      plugin = PLUGINS['TRX']
+    default:
+      break;
+  }
+
   if (!plugin) throw new Error(`Unsupported coin: ${cryptoCode}`)
   return plugin
 }
@@ -121,6 +137,12 @@ function getAddressType (cryptoCode, address, network) {
   return plugin.getAddressType(address, network)
 }
 
+function getEquivalentCode (cryptoCurrency) {
+  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT' }
+
+  return PEGGED_CRYPTO_CURRENCIES[cryptoCurrency] || cryptoCurrency
+}
+
 module.exports = {
   buildUrl,
   cryptoDir,
@@ -139,5 +161,6 @@ module.exports = {
   formatAddress,
   formatAddressCasing,
   createWallet,
-  getAddressType
+  getAddressType,
+  getEquivalentCode
 }
