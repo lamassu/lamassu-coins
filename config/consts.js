@@ -86,6 +86,7 @@ const CRYPTOS = [
     defaultPort: 8545,
     unitScale: 18,
     zeroConf: false,
+    hideFromInstall: true,
     type: 'coin',
     units:{
       full: {
@@ -104,6 +105,7 @@ const CRYPTOS = [
     code: 'tron',
     unitScale: 6,
     zeroConf: false,
+    hideFromInstall: true,
     type: 'coin',
     units:{
       full: {
@@ -119,10 +121,12 @@ const CRYPTOS = [
   },
   {
     cryptoCode: COINS.USDT_TRON,
+    cryptoCodeDisplay: 'USDT (Tron)',
     display: 'USDT (Tron)',
     code: 'tether_tron',
     unitScale: 6,
     zeroConf: false,
+    hideFromInstall: true,
     contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
     testnetContractAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
     type: 'trc-20',
@@ -162,6 +166,7 @@ const CRYPTOS = [
     unitScale: 6,
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     type: 'erc-20',
+    hideFromInstall: true,
     units:{
       full: {
         displayScale: 6,
@@ -202,6 +207,7 @@ const CRYPTOS = [
     defaultPort: 8232,
     unitScale: 8,
     zeroConf: true,
+    hideFromInstall: true,
     type: 'coin',
     units:{
       full: {
