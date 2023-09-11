@@ -116,8 +116,7 @@ const CRYPTOS = [
         displayScale: 3,
         displayCode: 'mTRX'
       }
-    },
-    isCashinOnly: true
+    }
   },
   {
     cryptoCode: COINS.USDT_TRON,
