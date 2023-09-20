@@ -9,8 +9,9 @@ const LTC = require('./plugins/ltc')
 const DASH = require('./plugins/dash')
 const BCH = require('./plugins/bch')
 const XMR = require('./plugins/xmr')
+const TRX = require('./plugins/trx')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR }
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
@@ -24,10 +25,20 @@ function cryptoCurrencies () {
   return consts.CRYPTO_CURRENCIES
 }
 
+function getTrc20Token (cryptoCode) {
+  const token = _.find(['cryptoCode', cryptoCode], trc20Tokens())
+  if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
+  return token
+}
+
 function getErc20Token (cryptoCode) {
   const token = _.find(['cryptoCode', cryptoCode], erc20Tokens())
   if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
   return token
+}
+
+function trc20Tokens () {
+  return _.filter(e => e.type === 'trc-20', consts.CRYPTO_CURRENCIES)
 }
 
 function erc20Tokens () {
@@ -36,6 +47,10 @@ function erc20Tokens () {
 
 function isErc20Token (cryptoCode) {
   return getCryptoCurrency(cryptoCode).type === 'erc-20'
+}
+
+function isTrc20Token (cryptoCode) {
+  return getCryptoCurrency(cryptoCode).type === 'trc-20'
 }
 
 function buildUrl (cryptoCode, address) {
@@ -62,7 +77,22 @@ function formatCryptoAddress(cryptoCode = '', address = '') {
 }
 
 function coinPlugin (cryptoCode) {
-  const plugin = getCryptoCurrency(cryptoCode).type === 'coin' ? PLUGINS[cryptoCode] : PLUGINS['ETH']
+  const coin = getCryptoCurrency(cryptoCode)
+  const type = coin.type || 'coin'
+
+  let plugin = null
+  switch (type) {
+    case 'coin':
+      plugin = PLUGINS[cryptoCode]
+      break;
+    case 'erc-20':
+      plugin = PLUGINS['ETH']
+    case 'trc-20':
+      plugin = PLUGINS['TRX']
+    default:
+      break;
+  }
+
   if (!plugin) throw new Error(`Unsupported coin: ${cryptoCode}`)
   return plugin
 }
@@ -107,6 +137,12 @@ function getAddressType (cryptoCode, address, network) {
   return plugin.getAddressType(address, network)
 }
 
+function getEquivalentCode (cryptoCurrency) {
+  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT' }
+
+  return PEGGED_CRYPTO_CURRENCIES[cryptoCurrency] || cryptoCurrency
+}
+
 module.exports = {
   buildUrl,
   cryptoDir,
@@ -114,6 +150,8 @@ module.exports = {
   cryptoCurrencies,
   erc20Tokens,
   getCryptoCurrency,
+  getTrc20Token,
+  isTrc20Token,
   getErc20Token,
   isErc20Token,
   toUnit,
@@ -123,5 +161,6 @@ module.exports = {
   formatAddress,
   formatAddressCasing,
   createWallet,
-  getAddressType
+  getAddressType,
+  getEquivalentCode
 }

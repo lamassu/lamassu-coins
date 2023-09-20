@@ -8,7 +8,9 @@ const COINS = {
   LTC: 'LTC',
   ZEC: 'ZEC',
   USDT: 'USDT',
-  XMR: 'XMR'
+  XMR: 'XMR',
+  TRX: 'TRX',
+  USDT_TRON: 'USDT_TRON'
 }
 
 const CRYPTOS = [
@@ -84,6 +86,7 @@ const CRYPTOS = [
     defaultPort: 8545,
     unitScale: 18,
     zeroConf: false,
+    hideFromInstall: true,
     type: 'coin',
     units:{
       full: {
@@ -95,6 +98,44 @@ const CRYPTOS = [
         displayCode: 'mETH'
       }
     }
+  },
+  {
+    cryptoCode: COINS.TRX,
+    display: 'Tron',
+    code: 'tron',
+    unitScale: 6,
+    zeroConf: false,
+    hideFromInstall: true,
+    type: 'coin',
+    units:{
+      full: {
+        displayScale: 6,
+        displayCode: 'TRX'
+      },
+      mili: {
+        displayScale: 3,
+        displayCode: 'mTRX'
+      }
+    }
+  },
+  {
+    cryptoCode: COINS.USDT_TRON,
+    cryptoCodeDisplay: 'USDT (Tron)',
+    display: 'USDT (Tron)',
+    code: 'tether_tron',
+    unitScale: 6,
+    zeroConf: false,
+    hideFromInstall: true,
+    contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+    testnetContractAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
+    type: 'trc-20',
+    units:{
+      full: {
+        displayScale: 6,
+        displayCode: 'USDT (Tron)'
+      }
+    },
+    isCashinOnly: true
   },
   {
     cryptoCode: COINS.LTC,
@@ -124,6 +165,7 @@ const CRYPTOS = [
     unitScale: 6,
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     type: 'erc-20',
+    hideFromInstall: true,
     units:{
       full: {
         displayScale: 6,
@@ -164,6 +206,7 @@ const CRYPTOS = [
     defaultPort: 8232,
     unitScale: 8,
     zeroConf: true,
+    hideFromInstall: true,
     type: 'coin',
     units:{
       full: {
