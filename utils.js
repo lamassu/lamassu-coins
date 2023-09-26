@@ -87,8 +87,10 @@ function coinPlugin (cryptoCode) {
       break;
     case 'erc-20':
       plugin = PLUGINS['ETH']
+      break;
     case 'trc-20':
       plugin = PLUGINS['TRX']
+      break;
     default:
       break;
   }
