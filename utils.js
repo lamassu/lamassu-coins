@@ -123,7 +123,7 @@ function formatAddress (cryptoCode, address) {
 function formatAddressCasing (cryptoCode, address) {
   const plugin = coinPlugin(cryptoCode)
   if (!plugin.bech32Opts) return address
-  return isBech32Address(address, plugin.bech32Opts) ? address.toLowerCase() : address
+  return isBech32Address(address, plugin.bech32Opts, plugin.lengthLimit) ? address.toLowerCase() : address
 }
 
 function createWallet (cryptoCode) {
