@@ -10,8 +10,9 @@ const DASH = require('./plugins/dash')
 const BCH = require('./plugins/bch')
 const XMR = require('./plugins/xmr')
 const TRX = require('./plugins/trx')
+const LN = require('./plugins/ln')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX }
+const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
@@ -122,7 +123,7 @@ function formatAddress (cryptoCode, address) {
 function formatAddressCasing (cryptoCode, address) {
   const plugin = coinPlugin(cryptoCode)
   if (!plugin.bech32Opts) return address
-  return isBech32Address(address, plugin.bech32Opts) ? address.toLowerCase() : address
+  return isBech32Address(address, plugin.bech32Opts, plugin.lengthLimit) ? address.toLowerCase() : address
 }
 
 function createWallet (cryptoCode) {
@@ -140,7 +141,7 @@ function getAddressType (cryptoCode, address, network) {
 }
 
 function getEquivalentCode (cryptoCurrency) {
-  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT' }
+  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT', LN: 'BTC' }
 
   return PEGGED_CRYPTO_CURRENCIES[cryptoCurrency] || cryptoCurrency
 }

@@ -8,6 +8,7 @@
     "bitcoinjs-lib": "4.0.3",
     "bitcore-lib-cash": "^8.25.25",
     "blakejs": "^1.2.1",
+    "bolt11": "1.4.1",
     "bs58check": "^2.0.2",
     "cashaddrjs": "~0.2.8",
     "crypto-js": "^3.1.9-1",

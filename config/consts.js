@@ -10,7 +10,8 @@ const COINS = {
   USDT: 'USDT',
   XMR: 'XMR',
   TRX: 'TRX',
-  USDT_TRON: 'USDT_TRON'
+  USDT_TRON: 'USDT_TRON',
+  LN: 'LN'
 }
 
 const CRYPTOS = [
@@ -218,7 +219,28 @@ const CRYPTOS = [
         displayCode: 'mZEC'
       }
     }
-  }
+  },
+  {
+    cryptoCode: COINS.LN,
+    display: 'Lightning Network',
+    code: 'ln',
+    configFile: null,
+    daemon: null,
+    defaultPort: null,
+    unitScale: 8,
+    zeroConf: true,
+    type: 'coin',
+    units:{
+      full: {
+        displayScale: 8,
+        displayCode: 'BTC'
+      },
+      mili: {
+        displayScale: 5,
+        displayCode: 'mBTC'
+      }
+    }
+  },
 ]
 
 const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
