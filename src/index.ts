@@ -1,17 +1,8 @@
 const configCoins = require('./config/consts')
-const coinUtils = require('./utils')
-const addressDetector = require('./plugins/detector')
 
-const COINS = configCoins.COINS
-const ALL_CRYPTOS = configCoins.ALL_CRYPTOS
-const CRYPTO_CURRENCIES = configCoins.CRYPTO_CURRENCIES
-const utils = coinUtils
+export const addressDetector = require('./plugins/detector')
 
-
-module.exports = {
-  COINS,
-  ALL_CRYPTOS,
-  CRYPTO_CURRENCIES,
-  utils,
-  addressDetector
-}
+export const COINS = configCoins.COINS
+export const ALL_CRYPTOS = configCoins.ALL_CRYPTOS
+export const CRYPTO_CURRENCIES = configCoins.CRYPTO_CURRENCIES
+export const utils = require('./utils')
