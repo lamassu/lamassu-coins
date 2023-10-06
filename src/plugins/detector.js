@@ -1,6 +1,6 @@
 const _ = require('lodash/fp')
-const utils = require('../../utils')
-const { ALL_CRYPTOS } = require('../../config/consts')
+const utils = require('../utils')
+const { ALL_CRYPTOS } = require('../config/consts')
 
 const NETWORKS = ['main', 'test', 'regtest']
 

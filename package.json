@@ -18,6 +18,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
+    "build": "tsc",
     "test": "npx jest --silent"
   },
   "description": "",
