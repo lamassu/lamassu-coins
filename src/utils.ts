@@ -59,12 +59,13 @@ export function buildUrl (cryptoCode: string, address: string) {
   return coinPlugin(cryptoCode).buildUrl(address)
 }
 
-export function cryptoDir (cryptoRec, blockchainDir) {
+/* TODO: make cryptoRec more restrictive */
+export function cryptoDir (cryptoRec: any, blockchainDir: string) {
   const code = cryptoRec.code
   return path.resolve(blockchainDir, code)
 }
 
-export function configPath (cryptoRec, blockchainDir) {
+export function configPath (cryptoRec: any, blockchainDir: string) {
   return path.resolve(cryptoDir(cryptoRec, blockchainDir), cryptoRec.configFile)
 }
 

@@ -79,7 +79,7 @@ function getAddressType (address, network) {
   return null
 }
 
-module.exports = {
+export default {
   depositUrl,
   parseUrl,
   buildUrl,
