@@ -1,10 +1,10 @@
-const BTC = require('../../plugins/btc')
-const LTC = require('../../plugins/ltc')
-const DASH = require('../../plugins/dash')
-const ZEC = require('../../plugins/zec')
-const ETH = require('../../plugins/eth')
-const BCH = require('../../plugins/bch')
-const TRX = require('../../plugins/trx')
+const BTC = require('../../built/plugins/btc')
+const LTC = require('../../built/plugins/ltc')
+const DASH = require('../../built/plugins/dash')
+const ZEC = require('../../built/plugins/zec')
+const ETH = require('../../built/plugins/eth')
+const BCH = require('../../built/plugins/bch')
+const TRX = require('../../built/plugins/trx')
 
 test('Should parse BTC address', () => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'

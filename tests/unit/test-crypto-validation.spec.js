@@ -1,9 +1,9 @@
-const cryptoValidator = require('../../plugins/validators')
-const BTC = require('../../plugins/btc')
-const LTC = require('../../plugins/ltc')
-const DASH = require('../../plugins/dash')
-const XMR = require('../../plugins/xmr')
-const ZEC = require('../../plugins/zec')
+const cryptoValidator = require('../../built/plugins/validators')
+const BTC = require('../../built/plugins/btc')
+const LTC = require('../../built/plugins/ltc')
+const DASH = require('../../built/plugins/dash')
+const XMR = require('../../built/plugins/xmr')
+const ZEC = require('../../built/plugins/zec')
 
 test('Should validate BTC P2PKH', () => {
   const mainNetaddr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
