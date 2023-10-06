@@ -1,8 +1,8 @@
 {
   "name": "@lamassu/coins",
-  "version": "v1.4.0-beta.3",
+  "version": "v1.4.0-beta.4",
   "dependencies": {
-    "@lamassu/bolt11": "1.4.2",
+    "@lamassu/bolt11": "1.5.0",
     "bech32": "2.0.0",
     "big-integer": "^1.6.48",
     "bignumber.js": "^9.0.0",
