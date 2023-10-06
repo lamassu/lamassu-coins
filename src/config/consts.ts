@@ -1,6 +1,6 @@
 const _ = require('lodash/fp')
 
-const COINS = {
+export const COINS = {
   BTC: 'BTC',
   BCH: 'BCH',
   DASH: 'DASH',
@@ -243,8 +243,6 @@ const CRYPTOS = [
   },
 ]
 
-const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
+export const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
 
-const ALL_CRYPTOS = _.keys(COINS)
-
-module.exports = { CRYPTO_CURRENCIES, COINS, ALL_CRYPTOS }
+export const ALL_CRYPTOS = _.keys(COINS)
