@@ -1,7 +1,7 @@
 const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
 const btc = require('./btc')
-const invoice = require('bolt11')
+const invoice = require('@lamassu/bolt11')
 const bech32Validator = require('./validators').bech32Validator
 
 const bech32Opts = {
