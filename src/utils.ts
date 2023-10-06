@@ -16,23 +16,24 @@ const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
-function getCryptoCurrency (cryptoCode) {
+/* TODO: make cryptoCode more restrictive: https://www.typescriptlang.org/docs/handbook/enums.html */
+export function getCryptoCurrency (cryptoCode: string) {
   const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
   if (!cryptoCurrency) throw new Error(`Unsupported crypto: ${cryptoCode}`)
   return cryptoCurrency
 }
 
-function cryptoCurrencies () {
+export function cryptoCurrencies () {
   return consts.CRYPTO_CURRENCIES
 }
 
-function getTrc20Token (cryptoCode) {
+export function getTrc20Token (cryptoCode: string) {
   const token = _.find(['cryptoCode', cryptoCode], trc20Tokens())
   if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
   return token
 }
 
-function getErc20Token (cryptoCode) {
+export function getErc20Token (cryptoCode: string) {
   const token = _.find(['cryptoCode', cryptoCode], erc20Tokens())
   if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
   return token
@@ -42,42 +43,42 @@ function trc20Tokens () {
   return _.filter(e => e.type === 'trc-20', consts.CRYPTO_CURRENCIES)
 }
 
-function erc20Tokens () {
+export function erc20Tokens () {
   return _.filter(e => e.type === 'erc-20', consts.CRYPTO_CURRENCIES)
 }
 
-function isErc20Token (cryptoCode) {
+export function isErc20Token (cryptoCode: string) {
   return getCryptoCurrency(cryptoCode).type === 'erc-20'
 }
 
-function isTrc20Token (cryptoCode) {
+export function isTrc20Token (cryptoCode: string) {
   return getCryptoCurrency(cryptoCode).type === 'trc-20'
 }
 
-function buildUrl (cryptoCode, address) {
+export function buildUrl (cryptoCode: string, address: string) {
   return coinPlugin(cryptoCode).buildUrl(address)
 }
 
-function cryptoDir (cryptoRec, blockchainDir) {
+export function cryptoDir (cryptoRec, blockchainDir) {
   const code = cryptoRec.code
   return path.resolve(blockchainDir, code)
 }
 
-function configPath (cryptoRec, blockchainDir) {
+export function configPath (cryptoRec, blockchainDir) {
   return path.resolve(cryptoDir(cryptoRec, blockchainDir), cryptoRec.configFile)
 }
 
-function toUnit (cryptoAtoms, cryptoCode) {
+export function toUnit (cryptoAtoms, cryptoCode: string) {
   const cryptoRec = getCryptoCurrency(cryptoCode)
   const unitScale = cryptoRec.unitScale
   return cryptoAtoms.shiftedBy(-unitScale)
 }
 
-function formatCryptoAddress(cryptoCode = '', address = '') {
+export function formatCryptoAddress(cryptoCode: string = '', address: string = '') {
   return cryptoCode === 'BCH' ? address.replace('bitcoincash:', '') : address
 }
 
-function coinPlugin (cryptoCode) {
+function coinPlugin (cryptoCode: string) {
   const coin = getCryptoCurrency(cryptoCode)
   const type = coin.type || 'coin'
 
@@ -100,19 +101,20 @@ function coinPlugin (cryptoCode) {
   return plugin
 }
 
-function depositUrl (cryptoCode, address, amountStr) {
+export function depositUrl (cryptoCode: string, address: string, amount: string) {
   if (!address) return null
   const plugin = coinPlugin(cryptoCode)
-  return plugin.depositUrl(address, amountStr)
+  return plugin.depositUrl(address, amount)
 }
 
-function parseUrl (cryptoCode, network, url) {
+/* TODO: make network more restrictive */
+export function parseUrl (cryptoCode: string, network: string, url: string) {
   const plugin = coinPlugin(cryptoCode)
   const address = plugin.parseUrl(network, url)
   return formatAddressCasing(cryptoCode, address)
 }
 
-function formatAddress (cryptoCode, address) {
+export function formatAddress (cryptoCode: string, address: string) {
   if (!address) return null
 
   const plugin = coinPlugin(cryptoCode)
@@ -120,13 +122,13 @@ function formatAddress (cryptoCode, address) {
   return plugin.formatAddress(address)
 }
 
-function formatAddressCasing (cryptoCode, address) {
+export function formatAddressCasing (cryptoCode: string, address: string) {
   const plugin = coinPlugin(cryptoCode)
   if (!plugin.bech32Opts) return address
   return isBech32Address(address, plugin.bech32Opts, plugin.lengthLimit) ? address.toLowerCase() : address
 }
 
-function createWallet (cryptoCode) {
+export function createWallet (cryptoCode: string) {
   const plugin = coinPlugin(cryptoCode)
   if (!plugin.createWallet) {
     throw new Error(`${cryptoCode} paper wallet printing is not supported`)
@@ -135,35 +137,13 @@ function createWallet (cryptoCode) {
   return plugin.createWallet()
 }
 
-function getAddressType (cryptoCode, address, network) {
+export function getAddressType (cryptoCode: string, address: string, network: string) {
   const plugin = coinPlugin(cryptoCode)
   return plugin.getAddressType(address, network)
 }
 
-function getEquivalentCode (cryptoCurrency) {
+export function getEquivalentCode (cryptoCurrency: string) {
   const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT', LN: 'BTC' }
 
   return PEGGED_CRYPTO_CURRENCIES[cryptoCurrency] || cryptoCurrency
-}
-
-module.exports = {
-  buildUrl,
-  cryptoDir,
-  configPath,
-  cryptoCurrencies,
-  erc20Tokens,
-  getCryptoCurrency,
-  getTrc20Token,
-  isTrc20Token,
-  getErc20Token,
-  isErc20Token,
-  toUnit,
-  formatCryptoAddress,
-  depositUrl,
-  parseUrl,
-  formatAddress,
-  formatAddressCasing,
-  createWallet,
-  getAddressType,
-  getEquivalentCode
 }

@@ -27,6 +27,7 @@
   "license": "Unlicense",
   "devDependencies": {
     "@types/bn.js": "^5.1.2",
+    "@types/lodash": "^4.14.199",
     "@types/node": "^20.8.2",
     "jest": "^26.6.3"
   }
