@@ -7,12 +7,18 @@ function depositUrl (address, amount) {
   return `ethereum:${address}?amount=${amount}`
 }
 
-function parseUrl (network, uri) {
+function parseUrl (network, uri, opts) {
+  const cryptoCode = (opts && opts.cryptoCode) || 'ETH'
   try {
     var rec = url.parse(uri)
     if (rec.protocol === 'iban:') {
       var icap = rec.host.toUpperCase()
       return ICAP.toAddress(icap)
+    }
+
+    if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
+      var address = rec.query.address
+      if (address && isValidAddress(address)) return address
     }
 
     if(rec.protocol === 'ethereum:') {
