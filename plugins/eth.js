@@ -1,4 +1,4 @@
-const url = require('url')
+const { URL } = require('url')
 const CryptoJS = require('crypto-js')
 const _sha3 = require('crypto-js/sha3')
 const ICAP = require('ethereumjs-icap')
@@ -10,24 +10,25 @@ function depositUrl (address, amount) {
 function parseUrl (network, uri, opts) {
   const cryptoCode = (opts && opts.cryptoCode) || 'ETH'
   try {
-    var rec = url.parse(uri)
+    const rec = new URL(uri)
+    let address = null
     if (rec.protocol === 'iban:') {
       var icap = rec.host.toUpperCase()
       return ICAP.toAddress(icap)
     }
 
     if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
-      var address = rec.query.address
+      address = rec.searchParams.get('address')
       if (address && isValidAddress(address)) return address
     }
 
     if(rec.protocol === 'ethereum:') {
       // auth stores the address for the metamask edge case: `ethereum:0xABCD@1`
-      var address = rec.auth
+      address = rec.auth
       if (address && isValidAddress(address)) return address
     }
 
-    var address = rec.path || rec.host
+    address = rec.pathname || rec.hostname
     if (address && isValidAddress(address)) return address
 
     return null
