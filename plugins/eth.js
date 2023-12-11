@@ -1,4 +1,4 @@
-const { URL } = require('url')
+const url = require('url')
 const CryptoJS = require('crypto-js')
 const _sha3 = require('crypto-js/sha3')
 const ICAP = require('ethereumjs-icap')
@@ -10,7 +10,7 @@ function depositUrl (address, amount) {
 function parseUrl (network, uri, opts) {
   const cryptoCode = (opts && opts.cryptoCode) || 'ETH'
   try {
-    const rec = new URL(uri)
+    const rec = url.parse(uri, true)
     let address = null
     if (rec.protocol === 'iban:') {
       var icap = rec.host.toUpperCase()
@@ -18,7 +18,7 @@ function parseUrl (network, uri, opts) {
     }
 
     if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
-      address = rec.searchParams.get('address')
+      address = rec.query.address
       if (address && isValidAddress(address)) return address
     }
 
@@ -28,7 +28,7 @@ function parseUrl (network, uri, opts) {
       if (address && isValidAddress(address)) return address
     }
 
-    address = rec.pathname || rec.hostname
+    address = rec.path || rec.host
     if (address && isValidAddress(address)) return address
 
     return null
