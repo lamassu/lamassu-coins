@@ -1,6 +1,6 @@
 {
   "name": "@lamassu/coins",
-  "version": "v1.3.3",
+  "version": "v1.3.4",
   "dependencies": {
     "bech32": "2.0.0",
     "big-integer": "^1.6.48",
