@@ -71,8 +71,22 @@ test('Should parse ETH address', () => {
   const addr2 = '0xe6C61C463b441CA6585EF1D5974389B360D503F6'
   const parsed1 = ETH.parseUrl('main', addr1)
   const parsed2 = ETH.parseUrl('main', `ethereum:${addr2}@1`)
+  const parsed3 = ETH.parseUrl('main', `ethereum:${addr1}@1/transfer?address=${addr2}`)
   expect(addr1).toBe(parsed1)
   expect(addr2).toBe(parsed2)
+  expect(null).toBe(parsed3)
+})
+
+test('Should parse USDT address', () => {
+  const addr1 = '71E23708793f83Cf8Aa72e26D31E9cd75B5691B5'
+  const addr2 = '0xe6C61C463b441CA6585EF1D5974389B360D503F6'
+  const opts = { cryptoCode: 'USDT' }
+  const parsed1 = ETH.parseUrl('main', addr1, opts)
+  const parsed2 = ETH.parseUrl('main', `ethereum:${addr2}@1`, opts)
+  const parsed3 = ETH.parseUrl('main', `ethereum:${addr1}@1/transfer?address=${addr2}`, opts)
+  expect(addr1).toBe(parsed1)
+  expect(addr2).toBe(parsed2)
+  expect(addr2).toBe(parsed3)
 })
 
 test('Should throw for invalid ETH address', () => {

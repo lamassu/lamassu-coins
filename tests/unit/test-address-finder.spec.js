@@ -333,7 +333,7 @@ test('Should match all addresses', () => {
   ]
   
   const addresses = _.map(it => it.address, expected)
-  const result = _.map(it => detector.detectAddress(it), addresses)
+  const result = _.map(it => detector.getSupportedCoinsForAddress(it), addresses)
 
   expect(result).toStrictEqual(expected)
 })
