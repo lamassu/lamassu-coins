@@ -17,6 +17,13 @@ function parseUrl (network, uri, opts) {
       return ICAP.toAddress(icap)
     }
 
+    const queryAddress = rec.query.address
+    console.log('queryAddress', queryAddress)
+    if (rec.protocol === 'ethereum:' && cryptoCode === 'ETH' && queryAddress) {
+      console.log('Token payment request is not an address')
+      return null
+    }
+
     if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
       address = rec.query.address
       if (address && isValidAddress(address)) return address
