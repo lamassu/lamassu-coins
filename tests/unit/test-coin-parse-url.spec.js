@@ -71,10 +71,8 @@ test('Should parse ETH address', () => {
   const addr2 = '0xe6C61C463b441CA6585EF1D5974389B360D503F6'
   const parsed1 = ETH.parseUrl('main', addr1)
   const parsed2 = ETH.parseUrl('main', `ethereum:${addr2}@1`)
-  const parsed3 = ETH.parseUrl('main', `ethereum:${addr1}@1/transfer?address=${addr2}`)
   expect(addr1).toBe(parsed1)
   expect(addr2).toBe(parsed2)
-  expect(null).toBe(parsed3)
 })
 
 test('Should parse USDT address', () => {
@@ -91,6 +89,17 @@ test('Should parse USDT address', () => {
 
 test('Should throw for invalid ETH address', () => {
   const addr = '71E23708793f83Cf8Aa72e26D31E9cd75B5691B5'
+  const spy = jest.spyOn(ETH, 'parseUrl')
+  try {
+    spy('main', addr)
+  } catch (error) { }
+  expect(spy).toThrow()
+})
+
+test('Should throw for invalid ETH address 2', () => {
+  const addr1 = '71E23708793f83Cf8Aa72e26D31E9cd75B5691B5'
+  const addr2 = '0xe6C61C463b441CA6585EF1D5974389B360D503F6'
+  const addr = `ethereum:${addr1}@1/transfer?address=${addr2}`
   const spy = jest.spyOn(ETH, 'parseUrl')
   try {
     spy('main', addr)
