@@ -18,10 +18,8 @@ function parseUrl (network, uri, opts) {
     }
 
     const queryAddress = rec.query.address
-    console.log('queryAddress', queryAddress)
     if (rec.protocol === 'ethereum:' && cryptoCode === 'ETH' && queryAddress) {
-      console.log('Token payment request is not an address')
-      return null
+      throw new Error('Invalid Address')
     }
 
     if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
@@ -38,7 +36,7 @@ function parseUrl (network, uri, opts) {
     address = rec.path || rec.host
     if (address && isValidAddress(address)) return address
 
-    return null
+    throw new Error('Invalid Address')
   } catch (e) {
     throw new Error('Invalid address')
   }
