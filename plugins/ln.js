@@ -11,7 +11,7 @@ const bech32Opts = {
 
 const lengthLimit = Number.MAX_SAFE_INTEGER
 
-function parseUrl (network, url) {
+function parseUrl (network, url, opts, fromMachine) {
   const urlElements = _.split('?', url);
 
   // Handle address type: bitcoin:bc1(...)?amount=0.00035&lightning=lnbc(...)
@@ -19,7 +19,7 @@ function parseUrl (network, url) {
     const lnElements = _.split('&', urlElements[1])
     const parameters = _.fromPairs(_.map(parameter => _.split('=', parameter) , lnElements))
     const invoice = parameters.lightning
-    if (!validate(network, invoice)) throw new Error('Invalid address')
+    if (!validate(network, invoice, fromMachine)) throw new Error('Invalid address')
     return invoice
   }
 
@@ -66,11 +66,11 @@ function formatAddress (address) {
   return address
 }
 
-function validate (network, address) {
+function validate (network, address, fromMachine) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
   const amount = invoice.decode(address).millisatoshis
-  if (!_.isNil(amount)) throw new Error('Non-zero amount invoice supplied.')
+  if (!_.isNil(amount) && fromMachine) throw new Error('Non-zero amount invoice supplied.')
   return bech32Validator(network, address, bech32Opts, lengthLimit)
 }
 

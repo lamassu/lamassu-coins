@@ -106,9 +106,9 @@ function depositUrl (cryptoCode, address, amountStr) {
   return plugin.depositUrl(address, amountStr)
 }
 
-function parseUrl (cryptoCode, network, url) {
+function parseUrl (cryptoCode, network, url, fromMachine = true) {
   const plugin = coinPlugin(cryptoCode)
-  const address = plugin.parseUrl(network, url, { cryptoCode })
+  const address = plugin.parseUrl(network, url, { cryptoCode }, fromMachine)
   return formatAddressCasing(cryptoCode, address)
 }
 
