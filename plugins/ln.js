@@ -43,23 +43,7 @@ function buildUrl (address) {
 }
 
 function depositUrl (address, amount) {
-  const urlElements = _.split('?', address)
-
-  if(_.size(urlElements) === 2) {
-    return address
-  }
-
-  const parts = _.split(':', address)
-
-  if(_.size(parts) === 2) {
-    return `${address}?amount=${amount}`
-  }
-
-  if(address.substr(0, 2) === 'ln') {
-    return `lightning:${address}?amount=${amount}`
-  } else {
-    return `bitcoin:${address}?amount=${amount}`
-  }
+  return address
 }
 
 function formatAddress (address) {
