@@ -51,7 +51,7 @@ function validate (network, address, fromMachine) {
   try {
     amount = _.toNumber(bolt11.decode(address).millisatoshis)
   } catch(e) {
-    throw new Error('Failure decoding invoice')
+    throw new Error('Invalid address')
   }
 
   if (amount !== 0 && fromMachine) throw new Error('Non-zero amount invoice supplied.', amount)

@@ -1,6 +1,6 @@
 {
   "name": "@lamassu/coins",
-  "version": "v1.4.7",
+  "version": "v1.4.8",
   "dependencies": {
     "@lamassu/bolt11": "1.5.1",
     "bech32": "2.0.0",
