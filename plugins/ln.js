@@ -1,6 +1,6 @@
 const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
-const invoice = require('@lamassu/bolt11')
+const bolt11 = require('@lamassu/bolt11')
 const bech32Validator = require('./validators').bech32Validator
 
 const bech32Opts = {
@@ -49,7 +49,7 @@ function validate (network, address, fromMachine) {
 
   let amount = 0
   try {
-    amount = _.toNumber(invoice.decode(address).millisatoshis)
+    amount = _.toNumber(bolt11.decode(address).millisatoshis)
   } catch(e) {
     throw new Error('Failure decoding invoice')
   }
@@ -58,22 +58,11 @@ function validate (network, address, fromMachine) {
   return bech32Validator(network, address, bech32Opts, lengthLimit)
 }
 
-function createWallet () {
-  const keyPair = bitcoin.ECPair.makeRandom()
-  const segwitAddr = bitcoin.payments.p2wpkh({ pubkey: keyPair.publicKey })
-
-  return {
-    publicAddress: segwitAddr.address,
-    privateKey: keyPair.toWIF()
-  }
-}
-
 module.exports = {
   depositUrl,
   parseUrl,
   buildUrl,
   formatAddress,
   bech32Opts,
-  lengthLimit,
-  createWallet
+  lengthLimit
 }
