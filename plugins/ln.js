@@ -46,7 +46,14 @@ function formatAddress (address) {
 function validate (network, address, fromMachine) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
-  const amount = _.toNumber(invoice.decode(address).millisatoshis)
+
+  let amount = 0
+  try {
+    amount = _.toNumber(invoice.decode(address).millisatoshis)
+  } catch(e) {
+    throw new Error('Failure decoding invoice')
+  }
+
   if (amount !== 0 && fromMachine) throw new Error('Non-zero amount invoice supplied.', amount)
   return bech32Validator(network, address, bech32Opts, lengthLimit)
 }
