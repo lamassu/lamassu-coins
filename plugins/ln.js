@@ -1,6 +1,5 @@
 const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
-const btc = require('./btc')
 const invoice = require('@lamassu/bolt11')
 const bech32Validator = require('./validators').bech32Validator
 
@@ -28,13 +27,7 @@ function parseUrl (network, url, opts, fromMachine) {
 
   console.log('DEBUG16: [%s] *%s*', network, address)
 
-  const prefix = address.substr(0, 2)
-  if(res[1] === 'lightning:' || prefix === 'ln' || prefix === 'LN') {
-    if (!validate(network, address)) throw new Error('Invalid address')
-  } else {
-    if (!btc.validate(network, address)) throw new Error('Invalid address')
-  }
-
+  if (!validate(network, address)) throw new Error('Invalid address')
   return address
 }
 
