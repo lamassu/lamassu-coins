@@ -3,7 +3,12 @@ const bitcoin = require('bitcoinjs-lib')
 const bolt11 = require('@lamassu/bolt11')
 const bech32Validator = require('./validators').bech32Validator
 
-const bech32Opts = {
+const lnurlOptions = {
+  mainNetPrefix: 'lnurl',
+  testNetPrefix: 'lntb'
+}
+
+const invoiceOptions = {
   mainNetPrefix: 'lnbc',
   testNetPrefix: 'lntb'
 }
@@ -47,15 +52,20 @@ function validate (network, address, fromMachine) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
 
-  let amount = 0
-  try {
-    amount = _.toNumber(bolt11.decode(address).millisatoshis)
-  } catch(e) {
-    throw new Error('Invalid address')
+  if (bech32Validator(network, address, invoiceOptions, lengthLimit)) {
+    let amount = 0
+    try {
+      amount = _.toNumber(bolt11.decode(address).millisatoshis)
+      if (amount !== 0 && fromMachine) throw new Error('Non-zero amount invoice supplied.', amount)
+    } catch(e) {
+      console.log(e)
+      throw new Error('Invalid address')
+    }
+    return true
   }
 
-  if (amount !== 0 && fromMachine) throw new Error('Non-zero amount invoice supplied.', amount)
-  return bech32Validator(network, address, bech32Opts, lengthLimit)
+  if (bech32Validator(network, address, lnurlOptions, lengthLimit)) return true
+  return false
 }
 
 module.exports = {
@@ -63,6 +73,5 @@ module.exports = {
   parseUrl,
   buildUrl,
   formatAddress,
-  bech32Opts,
   lengthLimit
 }
