@@ -140,7 +140,9 @@ export function getAddressType (cryptoCode: string, address: string, network: st
 }
 
 export function getEquivalentCode (cryptoCurrency: string) {
-  const PEGGED_CRYPTO_CURRENCIES = { USDT_TRON: 'USDT', LN: 'BTC' }
-
-  return PEGGED_CRYPTO_CURRENCIES[cryptoCurrency] || cryptoCurrency
+  switch (cryptoCurrency) {
+    case 'USDT_TRON': return 'USDT';
+    case 'LN': return 'BTC';
+    default: return cryptoCurrency;
+  }
 }
