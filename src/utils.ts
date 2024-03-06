@@ -36,11 +36,11 @@ export function getErc20Token (cryptoCode: string) {
 }
 
 function trc20Tokens () {
-  return _.filter(e => e.type === 'trc-20', CRYPTO_CURRENCIES)
+  return _.filter((e: any) => e.type === 'trc-20', CRYPTO_CURRENCIES)
 }
 
 export function erc20Tokens () {
-  return _.filter(e => e.type === 'erc-20', CRYPTO_CURRENCIES)
+  return _.filter((e: any) => e.type === 'erc-20', CRYPTO_CURRENCIES)
 }
 
 export function isErc20Token (cryptoCode: string) {
@@ -65,7 +65,7 @@ export function configPath (cryptoRec: any, blockchainDir: string) {
   return path.resolve(cryptoDir(cryptoRec, blockchainDir), cryptoRec.configFile)
 }
 
-export function toUnit (cryptoAtoms, cryptoCode: string) {
+export function toUnit (cryptoAtoms: any, cryptoCode: string) {
   const cryptoRec = getCryptoCurrency(cryptoCode)
   const unitScale = cryptoRec.unitScale
   return cryptoAtoms.shiftedBy(-unitScale)
