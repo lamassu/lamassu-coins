@@ -109,9 +109,9 @@ export function depositUrl (cryptoCode: string, address: string, amount: string)
 }
 
 /* TODO: make network more restrictive */
-export function parseUrl (cryptoCode: string, network: string, url: string) {
+export function parseUrl (cryptoCode: string, network: string, url: string, fromMachine: boolean = true) {
   const plugin = coinPlugin(cryptoCode)
-  const address = plugin.parseUrl(network, url)
+  const address = plugin.parseUrl(network, url, { cryptoCode }, fromMachine)
   return formatAddressCasing(cryptoCode, address)
 }
 

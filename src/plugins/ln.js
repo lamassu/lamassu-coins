@@ -1,17 +1,21 @@
 const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
-const btc = require('./btc')
-const invoice = require('@lamassu/bolt11')
+const bolt11 = require('@lamassu/bolt11')
 const bech32Validator = require('./validators').bech32Validator
 
-const bech32Opts = {
+const lnurlOptions = {
+  mainNetPrefix: 'lnurl',
+  testNetPrefix: 'lntb'
+}
+
+const invoiceOptions = {
   mainNetPrefix: 'lnbc',
   testNetPrefix: 'lntb'
 }
 
 const lengthLimit = Number.MAX_SAFE_INTEGER
 
-function parseUrl (network, url) {
+function parseUrl (network, url, opts, fromMachine) {
   const urlElements = _.split('?', url);
 
   // Handle address type: bitcoin:bc1(...)?amount=0.00035&lightning=lnbc(...)
@@ -19,7 +23,7 @@ function parseUrl (network, url) {
     const lnElements = _.split('&', urlElements[1])
     const parameters = _.fromPairs(_.map(parameter => _.split('=', parameter) , lnElements))
     const invoice = parameters.lightning
-    if (!validate(network, invoice)) throw new Error('Invalid address')
+    if (!validate(network, invoice, fromMachine)) throw new Error('Invalid address')
     return invoice
   }
 
@@ -28,13 +32,7 @@ function parseUrl (network, url) {
 
   console.log('DEBUG16: [%s] *%s*', network, address)
 
-  const prefix = address.substr(0, 2)
-  if(res[1] === 'lightning:' || prefix === 'ln' || prefix === 'LN') {
-    if (!validate(network, address)) throw new Error('Invalid address')
-  } else {
-    if (!btc.validate(network, address)) throw new Error('Invalid address')
-  }
-
+  if (!validate(network, address)) throw new Error('Invalid address')
   return address
 }
 
@@ -43,45 +41,31 @@ function buildUrl (address) {
 }
 
 function depositUrl (address, amount) {
-  const urlElements = _.split('?', address)
-
-  if(_.size(urlElements) === 2) {
-    return address
-  }
-
-  const parts = _.split(':', address)
-
-  if(_.size(parts) === 2) {
-    return `${address}?amount=${amount}`
-  }
-
-  if(address.substr(0, 2) === 'ln') {
-    return `lightning:${address}?amount=${amount}`
-  } else {
-    return `bitcoin:${address}?amount=${amount}`
-  }
+  return address
 }
 
 function formatAddress (address) {
   return address
 }
 
-function validate (network, address) {
+function validate (network, address, fromMachine) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
-  const amount = invoice.decode(address).millisatoshis
-  if (!_.isNil(amount)) throw new Error('Non-zero amount invoice supplied.')
-  return bech32Validator(network, address, bech32Opts, lengthLimit)
-}
 
-function createWallet () {
-  const keyPair = bitcoin.ECPair.makeRandom()
-  const segwitAddr = bitcoin.payments.p2wpkh({ pubkey: keyPair.publicKey })
-
-  return {
-    publicAddress: segwitAddr.address,
-    privateKey: keyPair.toWIF()
+  if (bech32Validator(network, address, invoiceOptions, lengthLimit)) {
+    let amount = 0
+    try {
+      amount = _.toNumber(bolt11.decode(address).millisatoshis)
+      if (amount !== 0 && fromMachine) throw new Error('Non-zero amount invoice supplied.', amount)
+    } catch(e) {
+      console.log(e)
+      throw new Error('Invalid address')
+    }
+    return true
   }
+
+  if (bech32Validator(network, address, lnurlOptions, lengthLimit)) return true
+  return false
 }
 
 module.exports = {
@@ -89,7 +73,5 @@ module.exports = {
   parseUrl,
   buildUrl,
   formatAddress,
-  bech32Opts,
-  lengthLimit,
-  createWallet
+  lengthLimit
 }

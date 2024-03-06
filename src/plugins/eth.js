@@ -7,24 +7,36 @@ function depositUrl (address, amount) {
   return `ethereum:${address}?amount=${amount}`
 }
 
-function parseUrl (network, uri) {
+function parseUrl (network, uri, opts) {
+  const cryptoCode = (opts && opts.cryptoCode) || 'ETH'
   try {
-    var rec = url.parse(uri)
+    const rec = url.parse(uri, true)
+    let address = null
     if (rec.protocol === 'iban:') {
       var icap = rec.host.toUpperCase()
       return ICAP.toAddress(icap)
     }
 
-    if(rec.protocol === 'ethereum:') {
-      // auth stores the address for the metamask edge case: `ethereum:0xABCD@1`
-      var address = rec.auth
+    const queryAddress = rec.query.address
+    if (rec.protocol === 'ethereum:' && cryptoCode === 'ETH' && queryAddress) {
+      throw new Error('Invalid Address')
+    }
+
+    if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
+      address = rec.query.address
       if (address && isValidAddress(address)) return address
     }
 
-    var address = rec.path || rec.host
+    if(rec.protocol === 'ethereum:') {
+      // auth stores the address for the metamask edge case: `ethereum:0xABCD@1`
+      address = rec.auth
+      if (address && isValidAddress(address)) return address
+    }
+
+    address = rec.path || rec.host
     if (address && isValidAddress(address)) return address
 
-    return null
+    throw new Error('Invalid Address')
   } catch (e) {
     throw new Error('Invalid address')
   }

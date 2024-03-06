@@ -85,8 +85,8 @@ function bech32Validator (network, address, opts, limit) {
   }
   // LN invoice
   if(limit) {
-    if (network === 'main' && decoded.prefix.substr(0, 4) === opts.mainNetPrefix) return true
-    if (network === 'test' && decoded.prefix.substr(0, 4) === opts.testNetPrefix) return true
+    if (network === 'main' && address.toLowerCase().startsWith(opts.mainNetPrefix)) return true
+    if (network === 'test' && address.toLowerCase().startsWith(opts.testNetPrefix)) return true
     return false
   }
 

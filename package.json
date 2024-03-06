@@ -1,8 +1,8 @@
 {
   "name": "@lamassu/coins",
-  "version": "v1.4.0-beta.2",
+  "version": "v1.4.10",
   "dependencies": {
-    "@lamassu/bolt11": "1.4.1",
+    "@lamassu/bolt11": "1.5.1",
     "bech32": "2.0.0",
     "big-integer": "^1.6.48",
     "bignumber.js": "^9.0.0",
@@ -24,7 +24,7 @@
   "description": "",
   "main": "src/index.js",
   "author": "Lamassu Industries",
-  "license": "Unlicense",
+  "license": "./LICENSE",
   "devDependencies": {
     "@types/bn.js": "^5.1.2",
     "@types/lodash": "^4.14.199",
