@@ -1,7 +1,7 @@
 const path = require('path')
 const _ = require('lodash/fp')
 
-const consts = require('./config/consts')
+const { CRYPTO_CURRENCIES } = require('./config/consts')
 const BTC = require('./plugins/btc')
 const ETH = require('./plugins/eth')
 const ZEC = require('./plugins/zec')
@@ -18,13 +18,9 @@ const isBech32Address = require('./plugins/validators').isBech32Address
 
 /* TODO: make cryptoCode more restrictive: https://www.typescriptlang.org/docs/handbook/enums.html */
 export function getCryptoCurrency (cryptoCode: string) {
-  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
+  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], CRYPTO_CURRENCIES)
   if (!cryptoCurrency) throw new Error(`Unsupported crypto: ${cryptoCode}`)
   return cryptoCurrency
-}
-
-export function cryptoCurrencies () {
-  return consts.CRYPTO_CURRENCIES
 }
 
 export function getTrc20Token (cryptoCode: string) {
@@ -40,11 +36,11 @@ export function getErc20Token (cryptoCode: string) {
 }
 
 function trc20Tokens () {
-  return _.filter(e => e.type === 'trc-20', consts.CRYPTO_CURRENCIES)
+  return _.filter(e => e.type === 'trc-20', CRYPTO_CURRENCIES)
 }
 
 export function erc20Tokens () {
-  return _.filter(e => e.type === 'erc-20', consts.CRYPTO_CURRENCIES)
+  return _.filter(e => e.type === 'erc-20', CRYPTO_CURRENCIES)
 }
 
 export function isErc20Token (cryptoCode: string) {
