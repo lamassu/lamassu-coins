@@ -17,7 +17,7 @@ export const bech32Opts = {
   regtestPrefix: 'bcrt'
 }
 
-export function parseUrl (network, url) {
+export function parseUrl (network: string, url: string) {
   const res = /^(bitcoin:)?(\w+)/i.exec(url)
   const address = res && res[2]
 
@@ -28,11 +28,11 @@ export function parseUrl (network, url) {
   return address
 }
 
-export function buildUrl (address) {
+export function buildUrl (address: string) {
   return `bitcoin:${address}`
 }
 
-export function depositUrl (address, amount) {
+export function depositUrl (address: string, amount: string) {
   const parts = _.split(':', address)
 
   // Strike LN payment
@@ -44,7 +44,7 @@ export function depositUrl (address, amount) {
   return `bitcoin:${address}?amount=${amount}`
 }
 
-export function formatAddress (address) {
+export function formatAddress (address: string) {
   const parts = _.split(':', address)
   const isLightning = _.size(parts) >= 2
 
@@ -52,7 +52,7 @@ export function formatAddress (address) {
   return address
 }
 
-export function validate (network, address) {
+export function validate (network: string|null|undefined, address: string|null|undefined) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
   if (bech32mValidator(network, address, bech32Opts)) return true
@@ -71,7 +71,7 @@ export function createWallet () {
   }
 }
 
-export function getAddressType (address, network) {
+export function getAddressType (address: string, network: string) {
   const _address = parseUrl(network, address)
   if (bech32mValidator(network, _address, bech32Opts)) return 'P2TR'
   if (base58Validator(network, _address, base58Opts)) return 'P2PKH/P2SH (legacy)'
