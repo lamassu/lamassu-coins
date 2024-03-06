@@ -4,20 +4,20 @@ const base58Validator = require('./validators').base58Validator
 const bech32Validator = require('./validators').bech32Validator
 const bech32mValidator = require('./validators').bech32mValidator
 
-const base58Opts = {
+export const base58Opts = {
   bufferLength: 21,
   mainNetPrefix: [ [0x00], [0x05] ],
   testNetPrefix: [ [0x6f], [0xc4] ],
   regtestPrefix: [ [0x6f], [0xc4] ]
 }
 
-const bech32Opts = {
+export const bech32Opts = {
   mainNetPrefix: 'bc',
   testNetPrefix: 'tb',
   regtestPrefix: 'bcrt'
 }
 
-function parseUrl (network, url) {
+export function parseUrl (network, url) {
   const res = /^(bitcoin:)?(\w+)/i.exec(url)
   const address = res && res[2]
 
@@ -28,11 +28,11 @@ function parseUrl (network, url) {
   return address
 }
 
-function buildUrl (address) {
+export function buildUrl (address) {
   return `bitcoin:${address}`
 }
 
-function depositUrl (address, amount) {
+export function depositUrl (address, amount) {
   const parts = _.split(':', address)
 
   // Strike LN payment
@@ -44,7 +44,7 @@ function depositUrl (address, amount) {
   return `bitcoin:${address}?amount=${amount}`
 }
 
-function formatAddress (address) {
+export function formatAddress (address) {
   const parts = _.split(':', address)
   const isLightning = _.size(parts) >= 2
 
@@ -52,7 +52,7 @@ function formatAddress (address) {
   return address
 }
 
-function validate (network, address) {
+export function validate (network, address) {
   if (!network) throw new Error('No network supplied.')
   if (!address) throw new Error('No address supplied.')
   if (bech32mValidator(network, address, bech32Opts)) return true
@@ -61,7 +61,7 @@ function validate (network, address) {
   return false
 }
 
-function createWallet () {
+export function createWallet () {
   const keyPair = bitcoin.ECPair.makeRandom()
   const segwitAddr = bitcoin.payments.p2wpkh({ pubkey: keyPair.publicKey })
 
@@ -71,22 +71,10 @@ function createWallet () {
   }
 }
 
-function getAddressType (address, network) {
+export function getAddressType (address, network) {
   const _address = parseUrl(network, address)
   if (bech32mValidator(network, _address, bech32Opts)) return 'P2TR'
   if (base58Validator(network, _address, base58Opts)) return 'P2PKH/P2SH (legacy)'
   if (bech32Validator(network, _address, bech32Opts)) return 'Native SegWit'
   return null
-}
-
-export default {
-  depositUrl,
-  parseUrl,
-  buildUrl,
-  formatAddress,
-  base58Opts,
-  bech32Opts,
-  createWallet,
-  getAddressType,
-  validate
 }
