@@ -79,10 +79,9 @@ function coinPlugin (cryptoCode: string) {
   const coin = getCryptoCurrency(cryptoCode)
   const type = coin.type ?? 'coin'
   switch (type) {
-    case 'coin': return PLUGINS[cryptoCode]
     case 'erc-20': return PLUGINS['ETH']
     case 'trc-20': return PLUGINS['TRX']
-    default: throw new Error(`Unsupported coin: ${cryptoCode}`)
+    default: return PLUGINS[cryptoCode]
   }
 }
 
