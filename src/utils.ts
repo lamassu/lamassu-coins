@@ -12,7 +12,7 @@ const XMR = require('./plugins/xmr')
 const TRX = require('./plugins/trx')
 const LN = require('./plugins/ln')
 
-const PLUGINS = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
+const PLUGINS: { [key: string]: any } = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
 
 const isBech32Address = require('./plugins/validators').isBech32Address
 
@@ -77,25 +77,13 @@ export function formatCryptoAddress(cryptoCode: string = '', address: string = '
 
 function coinPlugin (cryptoCode: string) {
   const coin = getCryptoCurrency(cryptoCode)
-  const type = coin.type || 'coin'
-
-  let plugin = null
+  const type = coin.type ?? 'coin'
   switch (type) {
-    case 'coin':
-      plugin = PLUGINS[cryptoCode]
-      break;
-    case 'erc-20':
-      plugin = PLUGINS['ETH']
-      break;
-    case 'trc-20':
-      plugin = PLUGINS['TRX']
-      break;
-    default:
-      break;
+    case 'coin': return PLUGINS[cryptoCode]
+    case 'erc-20': return PLUGINS['ETH']
+    case 'trc-20': return PLUGINS['TRX']
+    default: throw new Error(`Unsupported coin: ${cryptoCode}`)
   }
-
-  if (!plugin) throw new Error(`Unsupported coin: ${cryptoCode}`)
-  return plugin
 }
 
 export function depositUrl (cryptoCode: string, address: string, amount: string) {
