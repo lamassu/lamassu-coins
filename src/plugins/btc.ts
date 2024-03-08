@@ -1,4 +1,3 @@
-const _ = require('lodash/fp')
 const bitcoin = require('bitcoinjs-lib')
 const base58Validator = require('./validators').base58Validator
 const bech32Validator = require('./validators').bech32Validator
@@ -33,20 +32,20 @@ class BTC implements CryptoPlugin {
   }
 
   public depositUrl (address: string, amount: string, _opts?: any): string {
-    const parts = _.split(':', address)
+    const parts = address.split(':')
 
     // Strike LN payment
-    if (parts[0] === 'strike') return _.nth(3, parts)
+    if (parts[0] === 'strike') return parts[3]
 
     // Regular LN payment
-    if (_.size(parts) === 2) return _.nth(1, parts)
+    if (parts.length === 2) return parts[2]
 
     return `bitcoin:${address}?amount=${amount}`
   }
 
   formatAddress (address: string) {
-    const parts = _.split(':', address)
-    const isLightning = _.size(parts) >= 2
+    const parts = address.split(':')
+    const isLightning = parts.length >= 2
 
     if (isLightning) return 'Lightning Network'
     return address
