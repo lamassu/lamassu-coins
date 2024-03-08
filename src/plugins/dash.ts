@@ -1,4 +1,3 @@
-const _ = require('lodash/fp')
 const base58Validator = require('./validators').base58Validator
 
 import { CryptoPlugin } from './plugin'
