@@ -32,7 +32,7 @@ class BTC implements CryptoPlugin {
     return `bitcoin:${address}`
   }
 
-  public depositUrl (address: string, amount: string): string {
+  public depositUrl (address: string, amount: string, _opts?: any): string {
     const parts = _.split(':', address)
 
     // Strike LN payment
@@ -72,10 +72,10 @@ class BTC implements CryptoPlugin {
 
   public getAddressType (url: string, network: string): string | null {
     const address = this.parseUrl(network, url)
-    if (bech32mValidator(network, address, this.bech32Opts)) return 'P2TR'
-    if (base58Validator(network, address, this.base58Opts)) return 'P2PKH/P2SH (legacy)'
-    if (bech32Validator(network, address, this.bech32Opts)) return 'Native SegWit'
-    return null
+    return bech32mValidator(network, address, this.bech32Opts) ? 'P2TR' :
+      base58Validator(network, address, this.base58Opts) ? 'P2PKH/P2SH (legacy)' :
+      bech32Validator(network, address, this.bech32Opts) ? 'Native SegWit' :
+      null
   }
 }
 
