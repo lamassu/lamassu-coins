@@ -43,7 +43,7 @@ class BTC implements CryptoPlugin {
     return `bitcoin:${address}?amount=${amount}`
   }
 
-  formatAddress (address: string) {
+  public formatAddress (address: string): string {
     const parts = address.split(':')
     const isLightning = parts.length >= 2
 
@@ -51,7 +51,7 @@ class BTC implements CryptoPlugin {
     return address
   }
 
-  validate (network: string|null|undefined, address: string) {
+  public validate (network: string|null|undefined, address: string) {
     if (!network) throw new Error('No network supplied.')
     if (bech32mValidator(network, address, this.bech32Opts)) return true
     if (base58Validator(network, address, this.base58Opts)) return true
@@ -59,7 +59,7 @@ class BTC implements CryptoPlugin {
     return false
   }
 
-  createWallet () {
+  public createWallet () {
     const keyPair = bitcoin.ECPair.makeRandom()
     const segwitAddr = bitcoin.payments.p2wpkh({ pubkey: keyPair.publicKey })
 

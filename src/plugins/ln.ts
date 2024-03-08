@@ -65,6 +65,10 @@ class LN implements CryptoPlugin {
     return false
   }
 
+  public formatAddress (address: string): string {
+    return address
+  }
+
   public getAddressType (url: string, network: string): string | null {
     return null
   }

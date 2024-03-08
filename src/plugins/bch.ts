@@ -41,7 +41,7 @@ class BCH implements CryptoPlugin {
     }
   }
 
-  formatAddress (address: string): string {
+  public formatAddress (address: string): string {
     const [, secondPart] = address.split(':')
 
     if (secondPart) return secondPart
@@ -49,7 +49,7 @@ class BCH implements CryptoPlugin {
   }
 
 
-  createWallet() {
+  public createWallet() {
     const privateKey = new PrivateKey()
     const address = privateKey.toAddress().toString()
 
