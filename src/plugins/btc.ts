@@ -17,7 +17,7 @@ export const bech32Opts = {
   regtestPrefix: 'bcrt'
 }
 
-export function parseUrl (network: string, url: string) {
+export function parseUrl (network: string, url: string): string | never {
   const res = /^(bitcoin:)?(\w+)/i.exec(url)
   const address = res && res[2]
   console.log('DEBUG16: [%s] *%s*', network, address)
@@ -25,11 +25,11 @@ export function parseUrl (network: string, url: string) {
   return address
 }
 
-export function buildUrl (address: string) {
+export function buildUrl (address: string): string {
   return `bitcoin:${address}`
 }
 
-export function depositUrl (address: string, amount: string) {
+export function depositUrl (address: string, amount: string): string {
   const parts = _.split(':', address)
 
   // Strike LN payment
@@ -67,7 +67,7 @@ export function createWallet () {
   }
 }
 
-export function getAddressType (url: string, network: string) {
+export function getAddressType (url: string, network: string): string | null {
   const address = parseUrl(network, url)
   if (bech32mValidator(network, address, bech32Opts)) return 'P2TR'
   if (base58Validator(network, address, base58Opts)) return 'P2PKH/P2SH (legacy)'
