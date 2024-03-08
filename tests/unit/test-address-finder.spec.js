@@ -331,7 +331,7 @@ test('Should match all addresses', () => {
       ]
     }
   ]
-  
+
   const addresses = _.map(it => it.address, expected)
   const result = _.map(it => detector.getSupportedCoinsForAddress(it), addresses)
 

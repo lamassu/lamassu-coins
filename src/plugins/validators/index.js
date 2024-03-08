@@ -65,10 +65,10 @@ function bech32mValidator (network, address, opts) {
     return false
   }
 
-  const data = bech32m.fromWords(decoded.words.slice(1))	
-  if (data.length < 2 || data.length > 40) {	
-    console.log(`Invalid bech32m address length: ${data.length}`)	
-    return false	
+  const data = bech32m.fromWords(decoded.words.slice(1))
+  if (data.length < 2 || data.length > 40) {
+    console.log(`Invalid bech32m address length: ${data.length}`)
+    return false
   }
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
@@ -98,10 +98,10 @@ function bech32Validator (network, address, opts, limit) {
     return false
   }
 
-  const data = bech32.fromWords(decoded.words.slice(1))	
-  if (data.length !== 20 && data.length !== 32) {	
-    console.log(`Invalid bech32 address length: ${data.length}`)	
-    return false	
+  const data = bech32.fromWords(decoded.words.slice(1))
+  if (data.length !== 20 && data.length !== 32) {
+    console.log(`Invalid bech32 address length: ${data.length}`)
+    return false
   }
 
   if (network === 'main' && decoded.prefix === opts.mainNetPrefix) return true
@@ -123,9 +123,9 @@ function zecBech32Validator (network, address, opts) {
     return false
   }
 
-  const data = bech32.fromWords(decoded.words)	
-  if (data.length !== 43) {	
-    console.log(`Invalid bech32 address length: ${data.length}`)	
+  const data = bech32.fromWords(decoded.words)
+  if (data.length !== 43) {
+    console.log(`Invalid bech32 address length: ${data.length}`)
     return false
   }
 
@@ -166,7 +166,7 @@ function zecBech32mValidator (network, address, opts) {
 function xmrValidator (network, address, opts) {
   const keccak256Checksum = payload =>
     keccak256(Buffer.from(payload)).toString('hex').substr(0, 8)
-  
+
   const hexToBin = hex => {
     if (hex.length % 2 !== 0) return null
     var res = new Uint8Array(hex.length / 2)

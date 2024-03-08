@@ -14,7 +14,7 @@ function getSupportedCoinsForAddress (address) {
           return false
         }
       }, NETWORKS)
-  
+
       const addressType = utils.getAddressType(value, address, network)
 
       if (network && addressType) {
