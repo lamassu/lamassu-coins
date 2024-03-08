@@ -2,7 +2,7 @@ const path = require('path')
 const _ = require('lodash/fp')
 
 const { CRYPTO_CURRENCIES } = require('./config/consts')
-const BTC = require('./plugins/btc')
+const { default: BTC } = require('./plugins/btc')
 const ETH = require('./plugins/eth')
 const ZEC = require('./plugins/zec')
 const LTC = require('./plugins/ltc')

@@ -20,7 +20,7 @@ class BTC implements CryptoPlugin {
     regtestPrefix: 'bcrt'
   }
 
-  parseUrl (network: string, url: string): string | never {
+  public parseUrl (network: string, url: string): string | never {
     const res = /^(bitcoin:)?(\w+)/i.exec(url)
     const address = res && res[2]
     console.log('DEBUG16: [%s] *%s*', network, address)
@@ -28,11 +28,11 @@ class BTC implements CryptoPlugin {
     return address
   }
 
-  buildUrl (address: string): string {
+  public buildUrl (address: string): string {
     return `bitcoin:${address}`
   }
 
-  depositUrl (address: string, amount: string): string {
+  public depositUrl (address: string, amount: string): string {
     const parts = _.split(':', address)
 
     // Strike LN payment
@@ -70,7 +70,7 @@ class BTC implements CryptoPlugin {
     }
   }
 
-  getAddressType (url: string, network: string): string | null {
+  public getAddressType (url: string, network: string): string | null {
     const address = this.parseUrl(network, url)
     if (bech32mValidator(network, address, this.bech32Opts)) return 'P2TR'
     if (base58Validator(network, address, this.base58Opts)) return 'P2PKH/P2SH (legacy)'

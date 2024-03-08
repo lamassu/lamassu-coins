@@ -1,5 +1,5 @@
 const cryptoValidator = require('../../built/plugins/validators')
-const BTC = require('../../built/plugins/btc')
+const { default: BTC } = require('../../built/plugins/btc')
 const LTC = require('../../built/plugins/ltc')
 const DASH = require('../../built/plugins/dash')
 const XMR = require('../../built/plugins/xmr')
