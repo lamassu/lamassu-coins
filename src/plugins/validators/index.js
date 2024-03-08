@@ -36,12 +36,14 @@ function base58Validator (network, address, opts) {
       return false
     }
 
-    if (network === 'main' && validatePrefix(opts.mainNetPrefix, buf)) return true
-    if (network === 'test' && validatePrefix(opts.testNetPrefix, buf)) return true
-    if (network === 'regtest' && validatePrefix(opts.regtestPrefix, buf)) return true
+    const prefix = network === 'main' ? opts.mainNetPrefix :
+      network === 'test' ? opts.testNetPrefix :
+      network === 'regtest' ? opts.regtestPrefix :
+      null
+
+    if (prefix) return validatePrefix(prefix, buf)
     console.log('Unrecognized network:', network)
     return false
-
   } catch (error) {
     console.log('Not a base58 address:', error.message)
     return false
