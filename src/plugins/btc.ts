@@ -20,11 +20,8 @@ export const bech32Opts = {
 export function parseUrl (network: string, url: string) {
   const res = /^(bitcoin:)?(\w+)/i.exec(url)
   const address = res && res[2]
-
   console.log('DEBUG16: [%s] *%s*', network, address)
-
-  if (!validate(network, address)) throw new Error('Invalid address')
-
+  if (!address || !validate(network, address)) throw new Error('Invalid address')
   return address
 }
 
@@ -52,9 +49,8 @@ export function formatAddress (address: string) {
   return address
 }
 
-export function validate (network: string|null|undefined, address: string|null|undefined) {
+export function validate (network: string|null|undefined, address: string) {
   if (!network) throw new Error('No network supplied.')
-  if (!address) throw new Error('No address supplied.')
   if (bech32mValidator(network, address, bech32Opts)) return true
   if (base58Validator(network, address, base58Opts)) return true
   if (bech32Validator(network, address, bech32Opts)) return true
