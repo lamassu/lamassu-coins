@@ -1,5 +1,5 @@
 const { default: BTC } = require('../../built/plugins/btc')
-const LTC = require('../../built/plugins/ltc')
+const { default: LTC } = require('../../built/plugins/ltc')
 const { default: DASH } = require('../../built/plugins/dash')
 const ZEC = require('../../built/plugins/zec')
 const { default: ETH } = require('../../built/plugins/eth')
