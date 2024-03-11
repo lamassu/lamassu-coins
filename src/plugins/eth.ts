@@ -16,8 +16,9 @@ class ETH implements CryptoPlugin {
       const rec = url.parse(uri, true)
       let address = null
       if (rec.protocol === 'iban:') {
-        var icap = rec.host.toUpperCase()
-        return ICAP.toAddress(icap)
+        let icap = rec.host
+        if (!icap) throw new Error('Invalid Address')
+        return ICAP.toAddress(icap.toUpperCase())
       }
 
       const queryAddress = rec.query.address
