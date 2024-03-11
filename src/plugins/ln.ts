@@ -1,7 +1,7 @@
 import _ from 'lodash/fp'
 const bitcoin = require('bitcoinjs-lib')
 const bolt11 = require('@lamassu/bolt11')
-const bech32Validator = require('./validators').bech32Validator
+const { bech32Validator } = require('./validators')
 
 import { CryptoPlugin } from './plugin'
 

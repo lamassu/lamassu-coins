@@ -1,4 +1,4 @@
-const base58Validator = require('./validators').base58Validator
+const { base58Validator } = require('./validators')
 
 import { CryptoPlugin } from './plugin'
 

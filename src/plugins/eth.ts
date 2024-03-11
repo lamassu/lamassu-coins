@@ -1,4 +1,4 @@
-const url = require('url')
+import url from 'url'
 const CryptoJS = require('crypto-js')
 const _sha3 = require('crypto-js/sha3')
 const ICAP = require('ethereumjs-icap')

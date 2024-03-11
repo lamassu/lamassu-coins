@@ -1,7 +1,5 @@
 import _ from 'lodash/fp'
-const base58Validator = require('./validators').base58Validator
-const zecBech32Validator = require('./validators').zecBech32Validator
-const zecBech32mValidator = require('./validators').zecBech32mValidator
+const { base58Validator, zecBech32Validator, zecBech32mValidator } = require('./validators')
 
 import { CryptoPlugin } from './plugin'
 
