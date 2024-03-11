@@ -10,7 +10,7 @@
     "bitcore-lib-cash": "^8.25.25",
     "blakejs": "^1.2.1",
     "bs58check": "^2.0.2",
-    "cashaddrjs": "~0.2.8",
+    "cashaddrjs": "^0.4.4",
     "crypto-js": "^3.1.9-1",
     "ethereumjs-icap": "^0.3.1",
     "keccak256": "^1.0.2",
@@ -26,6 +26,7 @@
   "author": "Lamassu Industries",
   "license": "./LICENSE",
   "devDependencies": {
+    "@types/cashaddrjs": "^0.3.3",
     "@types/bn.js": "^5.1.2",
     "@types/lodash": "^4.14.199",
     "@types/node": "^20.8.2",
