@@ -9,7 +9,7 @@ const { default: LTC } = require('./plugins/ltc')
 const { default: DASH } = require('./plugins/dash')
 const { default: BCH } = require('./plugins/bch')
 const { default: XMR } = require('./plugins/xmr')
-const TRX = require('./plugins/trx')
+const { default: TRX } = require('./plugins/trx')
 const { default: LN } = require('./plugins/ln')
 
 const PLUGINS: { [key: string]: any } = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }

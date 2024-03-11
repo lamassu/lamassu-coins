@@ -4,7 +4,7 @@ const { default: DASH } = require('../../built/plugins/dash')
 const ZEC = require('../../built/plugins/zec')
 const { default: ETH } = require('../../built/plugins/eth')
 const { default: BCH } = require('../../built/plugins/bch')
-const TRX = require('../../built/plugins/trx')
+const { default: TRX } = require('../../built/plugins/trx')
 
 test('Should parse BTC address', () => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
