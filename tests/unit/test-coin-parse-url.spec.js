@@ -3,7 +3,7 @@ const { default: LTC } = require('../../built/plugins/ltc')
 const { default: DASH } = require('../../built/plugins/dash')
 const ZEC = require('../../built/plugins/zec')
 const { default: ETH } = require('../../built/plugins/eth')
-const BCH = require('../../built/plugins/bch')
+const { default: BCH } = require('../../built/plugins/bch')
 const TRX = require('../../built/plugins/trx')
 
 test('Should parse BTC address', () => {
