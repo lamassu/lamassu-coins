@@ -73,3 +73,5 @@ class LN implements CryptoPlugin {
     return null
   }
 }
+
+export default new LN()
