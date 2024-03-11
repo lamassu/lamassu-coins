@@ -51,12 +51,11 @@ class BTC implements CryptoPlugin {
     return address
   }
 
-  public validate (network: string|null|undefined, address: string) {
+  public validate (network: string|null|undefined, address: string): boolean | never {
     if (!network) throw new Error('No network supplied.')
-    if (bech32mValidator(network, address, this.bech32Opts)) return true
-    if (base58Validator(network, address, this.base58Opts)) return true
-    if (bech32Validator(network, address, this.bech32Opts)) return true
-    return false
+    return bech32mValidator(network, address, this.bech32Opts)
+      || base58Validator(network, address, this.base58Opts)
+      || bech32Validator(network, address, this.bech32Opts)
   }
 
   public createWallet () {

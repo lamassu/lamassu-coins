@@ -31,10 +31,9 @@ class XMR implements CryptoPlugin {
     return `monero:${addr}`
   }
 
-  validate (network: string|null|undefined, address: string) {
+  validate (network: string|null|undefined, address: string): boolean | never {
     if (!network) throw new Error('No network supplied.')
-    if (xmrValidator(network, address, this.opts)) return true
-    return false
+    return xmrValidator(network, address, this.opts)
   }
 
   public getAddressType(url: string, network: string): string | null {

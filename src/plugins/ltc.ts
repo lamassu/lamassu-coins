@@ -35,11 +35,10 @@ class LTC implements CryptoPlugin {
     return `litecoin:${addr}`
   }
 
-  public validate (network: string|null|undefined, address: string) {
+  public validate (network: string|null|undefined, address: string): boolean | never {
     if (!network) throw new Error('No network supplied.')
-    if (base58Validator(network, address, this.base58Opts)) return true
-    if (bech32Validator(network, address, this.bech32Opts)) return true
-    return false
+    return base58Validator(network, address, this.base58Opts)
+      || bech32Validator(network, address, this.bech32Opts)
   }
 
   public createWallet () {

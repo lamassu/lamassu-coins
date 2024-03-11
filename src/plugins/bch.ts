@@ -27,7 +27,7 @@ class BCH implements CryptoPlugin {
     return `${address}?amount=${amount}`
   }
 
-  validate (address: string): boolean {
+  validate (address: string): boolean | never {
     try {
       if (!address) throw new Error('No address supplied.')
 

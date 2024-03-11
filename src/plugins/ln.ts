@@ -47,7 +47,7 @@ class LN implements CryptoPlugin {
     return address
   }
 
-  validate (network: string, address: string, fromMachine?: string) {
+  validate (network: string, address: string, fromMachine?: string): boolean | never {
     if (!network) throw new Error('No network supplied.')
     if (bech32Validator(network, address, this.invoiceOptions, this.lengthLimit)) {
       let amount = 0
