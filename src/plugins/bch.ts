@@ -1,4 +1,4 @@
-const cashaddr = require('cashaddrjs')
+import cashaddr from 'cashaddrjs'
 import _ from 'lodash/fp'
 const { PrivateKey } = require('bitcore-lib-cash')
 
