@@ -1,5 +1,5 @@
 const cashaddr = require('cashaddrjs')
-const _ = require('lodash/fp')
+import _ from 'lodash/fp'
 const { PrivateKey } = require('bitcore-lib-cash')
 
 const NETWORK_PREFIX: { [key: string]: string } = {'main': 'bitcoincash:', 'test': 'bchtest:'}

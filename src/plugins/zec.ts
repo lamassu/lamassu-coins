@@ -1,4 +1,4 @@
-const _ = require('lodash/fp')
+import _ from 'lodash/fp'
 const base58Validator = require('./validators').base58Validator
 const zecBech32Validator = require('./validators').zecBech32Validator
 const zecBech32mValidator = require('./validators').zecBech32mValidator

@@ -1,20 +1,20 @@
-const path = require('path')
-const _ = require('lodash/fp')
+import _ from 'lodash/fp'
+import path from 'path'
 
-const { CRYPTO_CURRENCIES } = require('./config/consts')
-const { default: BTC } = require('./plugins/btc')
-const { default: ETH } = require('./plugins/eth')
-const { default: ZEC } = require('./plugins/zec')
-const { default: LTC } = require('./plugins/ltc')
-const { default: DASH } = require('./plugins/dash')
-const { default: BCH } = require('./plugins/bch')
-const { default: XMR } = require('./plugins/xmr')
-const { default: TRX } = require('./plugins/trx')
-const { default: LN } = require('./plugins/ln')
+import { CRYPTO_CURRENCIES } from './config/consts'
+import BTC from './plugins/btc'
+import ETH from './plugins/eth'
+import ZEC from './plugins/zec'
+import LTC from './plugins/ltc'
+import DASH from './plugins/dash'
+import BCH from './plugins/bch'
+import XMR from './plugins/xmr'
+import TRX from './plugins/trx'
+import LN from './plugins/ln'
 
 const PLUGINS: { [key: string]: any } = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
 
-const isBech32Address = require('./plugins/validators').isBech32Address
+const { isBech32Address } = require('./plugins/validators')
 
 /* TODO: make cryptoCode more restrictive: https://www.typescriptlang.org/docs/handbook/enums.html */
 export function getCryptoCurrency (cryptoCode: string) {

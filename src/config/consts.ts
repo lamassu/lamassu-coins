@@ -1,4 +1,4 @@
-const _ = require('lodash/fp')
+import _ from 'lodash/fp'
 
 export enum CryptoCode {
   BTC = 'BTC',
