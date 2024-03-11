@@ -8,7 +8,7 @@ const ZEC = require('./plugins/zec')
 const { default: LTC } = require('./plugins/ltc')
 const { default: DASH } = require('./plugins/dash')
 const { default: BCH } = require('./plugins/bch')
-const XMR = require('./plugins/xmr')
+const { default: XMR } = require('./plugins/xmr')
 const TRX = require('./plugins/trx')
 const { default: LN } = require('./plugins/ln')
 
