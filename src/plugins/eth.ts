@@ -27,7 +27,7 @@ class ETH implements CryptoPlugin {
       }
 
       if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
-        address = rec.query.address
+        address = rec.query.address as string /* TODO */
         if (address && this.isValidAddress(address)) return address
       }
 
