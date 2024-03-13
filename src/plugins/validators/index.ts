@@ -160,8 +160,8 @@ export function xmrValidator (network: string, address: string, opts: any): bool
 
   const hexToBin = (hex: string) => {
     if (hex.length % 2 !== 0) return null
-    var res = new Uint8Array(hex.length / 2)
-    for (var i = 0; i < hex.length / 2; ++i) {
+    let res = new Uint8Array(hex.length / 2)
+    for (let i = 0; i < hex.length / 2; ++i) {
       res[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16)
     }
     return res
