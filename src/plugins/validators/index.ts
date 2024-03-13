@@ -4,7 +4,7 @@ const { bech32, bech32m } = require('bech32')
 const keccak256 = require('keccak256')
 
 import * as cnBase58 from './crypto/cnbase58'
-const { f4Unjumble: reverseF4Jumble } = require('./crypto/f4jumble')
+import { f4Unjumble as reverseF4Jumble } from './crypto/f4jumble'
 
 function validatePrefix(prefix: string, buf: string): boolean {
   for (let prefixIndex = 0; prefixIndex < prefix.length; prefixIndex++) {
@@ -126,7 +126,7 @@ export function zecBech32Validator (network: string, address: string, opts: any)
 }
 
 export function zecBech32mValidator (network: string, address: string, opts: any): boolean {
-  const confirmPadding = (unjumbled: string, humanReadiblePadding: string): boolean => {
+  const confirmPadding = (unjumbled: Uint8Array, humanReadiblePadding: string): boolean => {
     const humanReadibleBuffer = Buffer.from(humanReadiblePadding).toString('hex')
     const lastBytes = Buffer.from(unjumbled).toString('hex').slice(-32)
 
