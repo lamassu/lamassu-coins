@@ -6,15 +6,13 @@ const keccak256 = require('keccak256')
 import * as cnBase58 from './crypto/cnbase58'
 import { f4Unjumble as reverseF4Jumble } from './crypto/f4jumble'
 
-function validatePrefix(prefixes: Array<Array<integer>>, buf: Buffer): boolean {
-  for (let prefixIndex = 0; prefixIndex < prefixes.length; prefixIndex++) {
-    let prefix = prefixes[prefixIndex]
-    for (let byteIndex = 0; byteIndex < prefix.length; byteIndex++) {
-      if (prefix[byteIndex] !== buf[byteIndex]) break
-      if (byteIndex === prefix.length - 1) return true
-    }
-  }
-  return false
+function validatePrefix(prefixes: Array<Array<number>>, buf: Buffer): boolean {
+  return prefixes.some((prefixArr: Array<number>) => {
+    const prefix = new Uint8Array(prefixArr)
+    const start = 0
+    const end = prefix.length
+    return buf.compare(prefix, start, end, start, end) === 0
+  })
 }
 
 export function base58Validator (network: string, address: string, opts: any): boolean {
