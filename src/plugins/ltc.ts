@@ -1,5 +1,5 @@
 import * as _ from 'lodash/fp'
-const bitcoin = require('bitcoinjs-lib')
+import * as bitcoin from 'bitcoinjs-lib'
 
 import { base58Validator, bech32Validator } from './validators'
 import { CryptoPlugin } from './plugin'

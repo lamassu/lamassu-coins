@@ -27,6 +27,7 @@
   "license": "./LICENSE",
   "devDependencies": {
     "@types/cashaddrjs": "^0.3.3",
+    "@types/bitcoinjs-lib": "^4.0.1",
     "@types/bitcore-lib-cash": "^8.23.8",
     "@types/bn.js": "^5.1.2",
     "@types/lodash": "^4.14.199",

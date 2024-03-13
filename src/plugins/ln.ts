@@ -1,5 +1,5 @@
 import * as _ from 'lodash/fp'
-const bitcoin = require('bitcoinjs-lib')
+import * as bitcoin from 'bitcoinjs-lib'
 const bolt11 = require('@lamassu/bolt11')
 
 import { bech32Validator } from './validators'
