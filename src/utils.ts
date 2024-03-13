@@ -1,4 +1,4 @@
-import * as _ from 'lodash/fp'
+import _ from 'lodash/fp'
 import path from 'path'
 
 import { CRYPTO_CURRENCIES } from './config/consts'

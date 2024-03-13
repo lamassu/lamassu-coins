@@ -1,5 +1,5 @@
 import cashaddr from 'cashaddrjs'
-import * as _ from 'lodash/fp'
+import _ from 'lodash/fp'
 import { PrivateKey } from 'bitcore-lib-cash'
 
 const NETWORK_PREFIX: { [key: string]: string } = { main: 'bitcoincash:', test: 'bchtest:' }

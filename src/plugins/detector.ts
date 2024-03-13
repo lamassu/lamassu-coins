@@ -1,5 +1,5 @@
-import * as _ from 'lodash/fp'
-import * as utils from '../utils'
+import _ from 'lodash/fp'
+import { getAddressType, parseUrl } from '../utils'
 import { ALL_CRYPTOS } from '../config/consts'
 
 const NETWORKS = ['main', 'test', 'regtest']
@@ -11,14 +11,14 @@ export function getSupportedCoinsForAddress (address: string): { address: string
     try {
       const network = _.find((network: string) => {
         try {
-          return !!utils.parseUrl(cryptoCode, network, address)
+          return !!parseUrl(cryptoCode, network, address)
         } catch (e) {
           return false
         }
       }, NETWORKS)
       if (!network) return acc
 
-      const addressType = utils.getAddressType(cryptoCode, address, network)
+      const addressType = getAddressType(cryptoCode, address, network)
       if (!addressType) return acc
 
       acc.push({ cryptoCode, addressType, isValid: true, network })
