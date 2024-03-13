@@ -1,6 +1,6 @@
 import url from 'url'
 import sha3 from 'crypto-js/sha3'
-const ICAP = require('ethereumjs-icap')
+import ICAP from 'ethereumjs-icap'
 
 import { CryptoPlugin } from './plugin'
 
