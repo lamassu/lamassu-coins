@@ -1,9 +1,9 @@
-const _ = require('lodash/fp')
+import * as _ from 'lodash/fp'
 const bs58check = require('bs58check')
 const { bech32, bech32m } = require('bech32')
 const keccak256 = require('keccak256')
 
-const cnBase58 = require('./crypto/cnbase58')
+import * as cnBase58 from './crypto/cnbase58'
 const { f4Unjumble: reverseF4Jumble } = require('./crypto/f4jumble')
 
 function validatePrefix(prefix: string, buf: string): boolean {
@@ -146,7 +146,6 @@ export function zecBech32mValidator (network: string, address: string, opts: any
   }
 
   const data = bech32m.fromWords(decoded.words)
-
   const res = reverseF4Jumble(data)
 
   if (network === 'main' && confirmPadding(res, opts.mainNetPrefix)) return true
@@ -171,8 +170,8 @@ export function xmrValidator (network: string, address: string, opts: any): bool
     const decoded = cnBase58.decode(address)
     const addrChecksum = decoded.slice(-8)
     const hashChecksum = keccak256Checksum(hexToBin(decoded.slice(0, -8)))
-    const matchesMainNetPrefix = _.startsWith(opts.mainNetPublicAddrPrefix, decoded) || _.startsWith(opts.mainNetIntegratedAddrPrefix, decoded) || _.startsWith(opts.mainNetSubAddrPrefix, decoded)
-    const matchesTestNetPrefix = _.startsWith(opts.testNetPublicAddrPrefix, decoded) || _.startsWith(opts.testNetIntegratedAddrPrefix, decoded) || _.startsWith(opts.testNetSubAddrPrefix, decoded)
+    const matchesMainNetPrefix = decoded.startsWith(opts.mainNetPublicAddrPrefix) || decoded.startsWith(opts.mainNetIntegratedAddrPrefix) || decoded.startsWith(opts.mainNetSubAddrPrefix)
+    const matchesTestNetPrefix = decoded.startsWith(opts.testNetPublicAddrPrefix) || decoded.startsWith(opts.testNetIntegratedAddrPrefix) || decoded.startsWith(opts.testNetSubAddrPrefix)
     if (network === 'main' && matchesMainNetPrefix && addrChecksum === hashChecksum) return true
     if (network === 'test' && matchesTestNetPrefix && addrChecksum === hashChecksum) return true
     return false
