@@ -6,17 +6,7 @@ const keccak256 = require('keccak256')
 const cnBase58 = require('./crypto/cnbase58')
 const { f4Unjumble: reverseF4Jumble } = require('./crypto/f4jumble')
 
-module.exports = {
-  base58Validator,
-  bech32mValidator,
-  bech32Validator,
-  isBech32Address,
-  zecBech32Validator,
-  zecBech32mValidator,
-  xmrValidator
-}
-
-function validatePrefix(prefix, buf) {
+function validatePrefix(prefix: string, buf: string): boolean {
   for (let prefixIndex = 0; prefixIndex < prefix.length; prefixIndex++) {
     let currentPrefix = prefix[prefixIndex]
     for (let byteIndex = 0; byteIndex < currentPrefix.length; byteIndex++) {
@@ -27,7 +17,7 @@ function validatePrefix(prefix, buf) {
   return false
 }
 
-function base58Validator (network, address, opts) {
+export function base58Validator (network: string, address: string, opts: any): boolean {
   try {
     const buf = bs58check.decode(address)
 
@@ -50,7 +40,7 @@ function base58Validator (network, address, opts) {
   }
 }
 
-function bech32mValidator (network, address, opts) {
+export function bech32mValidator (network: string, address: string, opts: any): boolean {
   let decoded
   try {
     decoded = bech32m.decode(address)
@@ -77,7 +67,7 @@ function bech32mValidator (network, address, opts) {
   return false
 }
 
-function bech32Validator (network, address, opts, limit) {
+export function bech32Validator (network: string, address: string, opts: any, limit: number): boolean {
   let decoded
   try {
     decoded = bech32.decode(address, limit)
@@ -110,11 +100,12 @@ function bech32Validator (network, address, opts, limit) {
   return false
 }
 
-function isBech32Address (address, opts, lengthLimit) {
-  return bech32Validator('main', address, opts, lengthLimit) || bech32Validator('test', address, opts, lengthLimit)
+export function isBech32Address (address: string, opts: any, lengthLimit: number): boolean {
+  return bech32Validator('main', address, opts, lengthLimit)
+      || bech32Validator('test', address, opts, lengthLimit)
 }
 
-function zecBech32Validator (network, address, opts) {
+export function zecBech32Validator (network: string, address: string, opts: any): boolean {
   let decoded
   try {
     decoded = bech32.decode(address)
@@ -134,8 +125,8 @@ function zecBech32Validator (network, address, opts) {
   return false
 }
 
-function zecBech32mValidator (network, address, opts) {
-  const confirmPadding = (unjumbled, humanReadiblePadding) => {
+export function zecBech32mValidator (network: string, address: string, opts: any): boolean {
+  const confirmPadding = (unjumbled: string, humanReadiblePadding: string): boolean => {
     const humanReadibleBuffer = Buffer.from(humanReadiblePadding).toString('hex')
     const lastBytes = Buffer.from(unjumbled).toString('hex').slice(-32)
 
@@ -163,11 +154,11 @@ function zecBech32mValidator (network, address, opts) {
   return false
 }
 
-function xmrValidator (network, address, opts) {
-  const keccak256Checksum = payload =>
-    keccak256(Buffer.from(payload)).toString('hex').substr(0, 8)
+export function xmrValidator (network: string, address: string, opts: any): boolean {
+  const keccak256Checksum = (payload: Uint8Array|null) =>
+    payload ? keccak256(Buffer.from(payload)).toString('hex').substr(0, 8) : null
 
-  const hexToBin = hex => {
+  const hexToBin = (hex: string) => {
     if (hex.length % 2 !== 0) return null
     var res = new Uint8Array(hex.length / 2)
     for (var i = 0; i < hex.length / 2; ++i) {
