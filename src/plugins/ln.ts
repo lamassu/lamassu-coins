@@ -1,4 +1,4 @@
-import _ from 'lodash/fp'
+import * as _ from 'lodash/fp'
 const bitcoin = require('bitcoinjs-lib')
 const bolt11 = require('@lamassu/bolt11')
 
