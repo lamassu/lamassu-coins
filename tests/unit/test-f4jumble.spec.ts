@@ -1,4 +1,4 @@
-const { f4Jumble, f4Unjumble } = require('../../built/plugins/validators/crypto/f4jumble')
+import { f4Jumble, f4Unjumble } from '../../built/plugins/validators/crypto/f4jumble'
 
 test('Should jumble simple case correctly', () => {
   const initial = Buffer.from([
