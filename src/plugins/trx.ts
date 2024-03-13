@@ -6,12 +6,8 @@ import { CryptoPlugin } from './plugin'
 class TRX implements CryptoPlugin {
   base58Opts = {
     bufferLength: 21,
-    mainNetPrefix: [
-      [0x41],
-    ],
-    testNetPrefix: [
-      [0x41],
-    ]
+    mainNetPrefix: [ [0x41] ],
+    testNetPrefix: [ [0x41] ]
   }
 
   public depositUrl(addr: string, amount: string, opts?: any): string {

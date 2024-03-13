@@ -1,17 +1,17 @@
 import * as _ from 'lodash/fp'
-const bs58check = require('bs58check')
+import * as bs58check from 'bs58check'
 const { bech32, bech32m } = require('bech32')
 const keccak256 = require('keccak256')
 
 import * as cnBase58 from './crypto/cnbase58'
 import { f4Unjumble as reverseF4Jumble } from './crypto/f4jumble'
 
-function validatePrefix(prefix: string, buf: string): boolean {
-  for (let prefixIndex = 0; prefixIndex < prefix.length; prefixIndex++) {
-    let currentPrefix = prefix[prefixIndex]
-    for (let byteIndex = 0; byteIndex < currentPrefix.length; byteIndex++) {
-      if (currentPrefix[byteIndex] !== buf[byteIndex]) break
-      if (byteIndex === currentPrefix.length - 1) return true
+function validatePrefix(prefixes: Array<Array<integer>>, buf: Buffer): boolean {
+  for (let prefixIndex = 0; prefixIndex < prefixes.length; prefixIndex++) {
+    let prefix = prefixes[prefixIndex]
+    for (let byteIndex = 0; byteIndex < prefix.length; byteIndex++) {
+      if (prefix[byteIndex] !== buf[byteIndex]) break
+      if (byteIndex === prefix.length - 1) return true
     }
   }
   return false
