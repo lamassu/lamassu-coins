@@ -1,8 +1,8 @@
 import cashaddr from 'cashaddrjs'
 import _ from 'lodash/fp'
-const { PrivateKey } = require('bitcore-lib-cash')
+import { PrivateKey } from 'bitcore-lib-cash'
 
-const NETWORK_PREFIX: { [key: string]: string } = {'main': 'bitcoincash:', 'test': 'bchtest:'}
+const NETWORK_PREFIX: { [key: string]: string } = { main: 'bitcoincash:', test: 'bchtest:' }
 
 import { CryptoPlugin } from './plugin'
 
