@@ -1,5 +1,4 @@
-const { base58Validator } = require('./validators')
-
+import { base58Validator } from './validators'
 import { CryptoPlugin } from './plugin'
 
 class DASH implements CryptoPlugin {

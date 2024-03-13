@@ -1,7 +1,8 @@
-import _ from 'lodash/fp'
+import * as _ from 'lodash/fp'
 import path from 'path'
 
 import { CRYPTO_CURRENCIES } from './config/consts'
+import { isBech32Address } from './plugins/validators'
 import BTC from './plugins/btc'
 import ETH from './plugins/eth'
 import ZEC from './plugins/zec'
@@ -13,8 +14,6 @@ import TRX from './plugins/trx'
 import LN from './plugins/ln'
 
 const PLUGINS: { [key: string]: any } = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN }
-
-const { isBech32Address } = require('./plugins/validators')
 
 /* TODO: make cryptoCode more restrictive: https://www.typescriptlang.org/docs/handbook/enums.html */
 export function getCryptoCurrency (cryptoCode: string) {

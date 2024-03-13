@@ -1,7 +1,6 @@
-import _ from 'lodash/fp'
+import * as _ from 'lodash/fp'
 
-const { xmrValidator } = require('./validators')
-
+import { xmrValidator } from './validators'
 import { CryptoPlugin } from './plugin'
 
 class XMR implements CryptoPlugin {

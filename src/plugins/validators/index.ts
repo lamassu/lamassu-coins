@@ -67,7 +67,7 @@ export function bech32mValidator (network: string, address: string, opts: any): 
   return false
 }
 
-export function bech32Validator (network: string, address: string, opts: any, limit: number): boolean {
+export function bech32Validator (network: string, address: string, opts: any, limit?: number): boolean {
   let decoded
   try {
     decoded = bech32.decode(address, limit)

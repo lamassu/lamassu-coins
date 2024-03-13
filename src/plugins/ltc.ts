@@ -1,7 +1,7 @@
 import _ from 'lodash/fp'
 const bitcoin = require('bitcoinjs-lib')
-const { base58Validator, bech32Validator } = require('./validators')
 
+import { base58Validator, bech32Validator } from './validators'
 import { CryptoPlugin } from './plugin'
 
 class LTC implements CryptoPlugin {

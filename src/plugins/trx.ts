@@ -1,6 +1,6 @@
-const url = require('url')
-const { base58Validator } = require('./validators')
+import url from 'url'
 
+import { base58Validator } from './validators'
 import { CryptoPlugin } from './plugin'
 
 class TRX implements CryptoPlugin {

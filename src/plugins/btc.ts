@@ -1,5 +1,5 @@
 const bitcoin = require('bitcoinjs-lib')
-const { base58Validator, bech32Validator, bech32mValidator } = require('./validators')
+import { base58Validator, bech32Validator, bech32mValidator } from './validators'
 
 import { CryptoPlugin } from './plugin'
 
