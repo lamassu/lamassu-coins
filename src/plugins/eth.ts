@@ -1,9 +1,13 @@
 import url from 'url'
-const CryptoJS = require('crypto-js')
-const _sha3 = require('crypto-js/sha3')
+import sha3 from 'crypto-js/sha3'
 const ICAP = require('ethereumjs-icap')
 
 import { CryptoPlugin } from './plugin'
+
+  /* Adapted from web3.js https://github.com/ethereum/web3.js */
+const sha3str = (value: string): string =>
+  sha3(value, { outputLength: 256 }).toString()
+
 
 class ETH implements CryptoPlugin {
   public depositUrl (address: string, amount: string): string {
@@ -56,14 +60,9 @@ class ETH implements CryptoPlugin {
       : this.isChecksumAddress(address)
   }
 
-  /* Adapted from web3.js https://github.com/ethereum/web3.js */
-  sha3 (value: string): string {
-    return _sha3(value, { outputLength: 256 }).toString()
-  }
-
   isChecksumAddress (address: string): boolean {
     address = address.replace('0x', '')
-    let addressHash = this.sha3(address.toLowerCase())
+    let addressHash = sha3str(address.toLowerCase())
 
     for (let i = 0; i < 40; i++) {
       if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) ||
