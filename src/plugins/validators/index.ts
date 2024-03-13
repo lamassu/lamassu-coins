@@ -1,6 +1,6 @@
 import * as _ from 'lodash/fp'
 import * as bs58check from 'bs58check'
-const { bech32, bech32m } = require('bech32')
+import { bech32, bech32m } from 'bech32'
 const keccak256 = require('keccak256')
 
 import * as cnBase58 from './crypto/cnbase58'
