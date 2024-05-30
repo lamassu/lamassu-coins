@@ -1,6 +1,4 @@
-const _ = require('lodash/fp')
-
-const detector = require('../../plugins/detector')
+import { getSupportedCoinsForAddress } from '../../built/plugins/detector'
 
 test('Should match all addresses', () => {
   const expected = [
@@ -331,9 +329,9 @@ test('Should match all addresses', () => {
       ]
     }
   ]
-  
-  const addresses = _.map(it => it.address, expected)
-  const result = _.map(it => detector.getSupportedCoinsForAddress(it), addresses)
+
+  const addresses = expected.map(it => it.address)
+  const result = addresses.map(address => getSupportedCoinsForAddress(address))
 
   expect(result).toStrictEqual(expected)
 })

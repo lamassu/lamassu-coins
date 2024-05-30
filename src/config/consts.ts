@@ -1,22 +1,24 @@
-const _ = require('lodash/fp')
+import _ from 'lodash/fp'
 
-const COINS = {
-  BTC: 'BTC',
-  BCH: 'BCH',
-  DASH: 'DASH',
-  ETH: 'ETH',
-  LTC: 'LTC',
-  ZEC: 'ZEC',
-  USDT: 'USDT',
-  XMR: 'XMR',
-  TRX: 'TRX',
-  USDT_TRON: 'USDT_TRON',
-  LN: 'LN'
+export enum CryptoCode {
+  BTC = 'BTC',
+  BCH = 'BCH',
+  DASH = 'DASH',
+  ETH = 'ETH',
+  LTC = 'LTC',
+  ZEC = 'ZEC',
+  USDT = 'USDT',
+  XMR = 'XMR',
+  TRX = 'TRX',
+  USDT_TRON = 'USDT_TRON',
+  LN = 'LN',
 }
+
+export const COINS = CryptoCode /* Keep COINS for backwards compat */
 
 const CRYPTOS = [
   {
-    cryptoCode: COINS.BTC,
+    cryptoCode: CryptoCode.BTC,
     display: 'Bitcoin',
     code: 'bitcoin',
     configFile: 'bitcoin.conf',
@@ -37,7 +39,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.BCH,
+    cryptoCode: CryptoCode.BCH,
     display: 'Bitcoin Cash',
     code: 'bitcoincash',
     configFile: 'bitcoincash.conf',
@@ -58,7 +60,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.DASH,
+    cryptoCode: CryptoCode.DASH,
     display: 'Dash',
     code: 'dash',
     configFile: 'dash.conf',
@@ -79,7 +81,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.ETH,
+    cryptoCode: CryptoCode.ETH,
     display: 'Ethereum',
     code: 'ethereum',
     configFile: 'geth.conf',
@@ -101,7 +103,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.TRX,
+    cryptoCode: CryptoCode.TRX,
     display: 'Tron',
     code: 'tron',
     unitScale: 6,
@@ -120,7 +122,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.USDT_TRON,
+    cryptoCode: CryptoCode.USDT_TRON,
     cryptoCodeDisplay: 'USDT (Tron)',
     display: 'USDT (Tron)',
     code: 'tether_tron',
@@ -139,7 +141,7 @@ const CRYPTOS = [
     isCashinOnly: true
   },
   {
-    cryptoCode: COINS.LTC,
+    cryptoCode: CryptoCode.LTC,
     display: 'Litecoin',
     code: 'litecoin',
     configFile: 'litecoin.conf',
@@ -160,7 +162,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.USDT,
+    cryptoCode: CryptoCode.USDT,
     display: 'USDT',
     code: 'tether',
     unitScale: 6,
@@ -176,7 +178,7 @@ const CRYPTOS = [
     isCashinOnly: true
   },
   {
-    cryptoCode: COINS.XMR,
+    cryptoCode: CryptoCode.XMR,
     display: 'Monero',
     code: 'monero',
     configFile: 'monero.conf',
@@ -199,7 +201,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.ZEC,
+    cryptoCode: CryptoCode.ZEC,
     display: 'Zcash',
     code: 'zcash',
     configFile: 'zcash.conf',
@@ -221,7 +223,7 @@ const CRYPTOS = [
     }
   },
   {
-    cryptoCode: COINS.LN,
+    cryptoCode: CryptoCode.LN,
     display: 'Lightning Network',
     code: 'ln',
     configFile: null,
@@ -243,8 +245,6 @@ const CRYPTOS = [
   },
 ]
 
-const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
+export const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
 
-const ALL_CRYPTOS = _.keys(COINS)
-
-module.exports = { CRYPTO_CURRENCIES, COINS, ALL_CRYPTOS }
+export const ALL_CRYPTOS = _.keys(CryptoCode)
