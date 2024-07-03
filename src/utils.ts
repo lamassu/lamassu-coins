@@ -17,9 +17,13 @@ const PLUGINS: { [key: string]: any } = { BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TR
 
 /* TODO: make cryptoCode more restrictive: https://www.typescriptlang.org/docs/handbook/enums.html */
 export function getCryptoCurrency (cryptoCode: string) {
-  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], CRYPTO_CURRENCIES)
+  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
   if (!cryptoCurrency) throw new Error(`Unsupported crypto: ${cryptoCode}`)
   return cryptoCurrency
+}
+
+export function cryptoCurrencies () {
+  return CRYPTO_CURRENCIES
 }
 
 export function getTrc20Token (cryptoCode: string) {
@@ -35,11 +39,11 @@ export function getErc20Token (cryptoCode: string) {
 }
 
 function trc20Tokens () {
-  return _.filter((e: any) => e.type === 'trc-20', CRYPTO_CURRENCIES)
+  return _.filter((e: any) => e.type === 'trc-20', cryptoCurrencies())
 }
 
 export function erc20Tokens () {
-  return _.filter((e: any) => e.type === 'erc-20', CRYPTO_CURRENCIES)
+  return _.filter((e: any) => e.type === 'erc-20', cryptoCurrencies())
 }
 
 export function isErc20Token (cryptoCode: string) {
