@@ -231,6 +231,7 @@ const CRYPTOS = [
     defaultPort: null,
     unitScale: 8,
     zeroConf: true,
+    hideFromInstall: true,
     type: 'coin',
     units:{
       full: {
