@@ -1,4 +1,3 @@
-import _ from 'lodash/fp'
 import bs58check from 'bs58check'
 import { bech32, bech32m } from 'bech32'
 import keccak256 from 'keccak256'

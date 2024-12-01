@@ -1,5 +1,3 @@
-import _ from 'lodash/fp'
-
 import { xmrValidator } from './validators'
 import { CryptoPlugin } from './plugin'
 

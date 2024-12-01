@@ -1,4 +1,5 @@
-import _ from 'lodash/fp'
+import reduce from 'lodash/fp/reduce'
+import find from 'lodash/fp/find'
 import { getAddressType, parseUrl } from '../utils'
 import { ALL_CRYPTOS } from '../config/consts'
 
@@ -7,9 +8,9 @@ const NETWORKS = ['main', 'test', 'regtest']
 type Matches = Array<any>;
 
 export function getSupportedCoinsForAddress (address: string): { address: string, matches: Matches } {
-  const matches = _.reduce((acc: Matches, cryptoCode: string) => {
+  const matches = reduce((acc: Matches, cryptoCode: string) => {
     try {
-      const network = _.find((network: string) => {
+      const network = find((network: string) => {
         try {
           return !!parseUrl(cryptoCode, network, address)
         } catch (e) {
