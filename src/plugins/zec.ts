@@ -1,3 +1,5 @@
+import _ from 'lodash/fp'
+
 import { base58Validator, zecBech32Validator, zecBech32mValidator } from './validators'
 import { CryptoPlugin } from './plugin'
 

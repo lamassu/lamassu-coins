@@ -1,3 +1,4 @@
+import _ from 'lodash/fp'
 import bitcoin from 'bitcoinjs-lib'
 
 import { base58Validator, bech32Validator } from './validators'

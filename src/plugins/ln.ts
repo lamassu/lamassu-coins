@@ -1,9 +1,5 @@
-import split from 'lodash/fp/split'
-import size from 'lodash/fp/size'
-import fromPairs from 'lodash/fp/fromPairs'
-import map from 'lodash/fp/map'
-import toNumber from 'lodash/fp/toNumber'
-
+import _ from 'lodash/fp'
+import bitcoin from 'bitcoinjs-lib'
 import bolt11 from '@lamassu/bolt11'
 
 import { bech32Validator } from './validators'
@@ -23,12 +19,12 @@ class LN implements CryptoPlugin {
   lengthLimit = Number.MAX_SAFE_INTEGER
 
   public parseUrl (network: string, url: string, opts?: any, fromMachine?: any): string | never {
-    const urlElements = split('?', url);
+    const urlElements = _.split('?', url);
 
     // Handle address type: bitcoin:bc1(...)?amount=0.00035&lightning=lnbc(...)
-    if(size(urlElements) === 2) {
-      const lnElements = split('&', urlElements[1])
-      const parameters = fromPairs(map((parameter: string) => split('=', parameter) , lnElements))
+    if(_.size(urlElements) === 2) {
+      const lnElements = _.split('&', urlElements[1])
+      const parameters = _.fromPairs(_.map((parameter: string) => _.split('=', parameter) , lnElements))
       const invoice = parameters.lightning
       if (!invoice || !this.validate(network, invoice, fromMachine)) throw new Error('Invalid address')
       return invoice
@@ -56,7 +52,7 @@ class LN implements CryptoPlugin {
     if (bech32Validator(network, address, this.invoiceOptions, this.lengthLimit)) {
       let amount = 0
       try {
-        amount = toNumber(bolt11.decode(address).millisatoshis)
+        amount = _.toNumber(bolt11.decode(address).millisatoshis)
         if (amount !== 0 && fromMachine) throw new Error(`Non-zero amount (${amount}) invoice supplied.`)
       } catch(e) {
         console.log(e)

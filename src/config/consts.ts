@@ -1,5 +1,4 @@
-import orderBy from 'lodash/fp/orderBy'
-import keys from 'lodash/fp/keys'
+import _ from 'lodash/fp'
 
 export enum CryptoCode {
   BTC = 'BTC',
@@ -247,6 +246,6 @@ const CRYPTOS = [
   },
 ]
 
-export const CRYPTO_CURRENCIES = orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
+export const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
 
-export const ALL_CRYPTOS = keys(CryptoCode)
+export const ALL_CRYPTOS = _.keys(CryptoCode)

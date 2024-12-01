@@ -1,5 +1,4 @@
-import find from 'lodash/fp/find'
-import filter from 'lodash/fp/filter'
+import _ from 'lodash/fp'
 import path from 'path'
 
 import {CRYPTO_CURRENCIES} from './config/consts'
@@ -22,23 +21,23 @@ export function cryptoCurrencies() {
 }
 
 export function getTrc20Token(cryptoCode: string) {
-  const token = find(['cryptoCode', cryptoCode], trc20Tokens())
+  const token = _.find(['cryptoCode', cryptoCode], trc20Tokens())
   if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
   return token
 }
 
 export function getErc20Token(cryptoCode: string) {
-  const token = find(['cryptoCode', cryptoCode], erc20Tokens())
+  const token = _.find(['cryptoCode', cryptoCode], erc20Tokens())
   if (!token) throw new Error(`Unsupported token: ${cryptoCode}`)
   return token
 }
 
 function trc20Tokens() {
-  return filter((e: any) => e.type === 'trc-20', cryptoCurrencies())
+  return _.filter((e: any) => e.type === 'trc-20', cryptoCurrencies())
 }
 
 export function erc20Tokens() {
-  return filter((e: any) => e.type === 'erc-20', cryptoCurrencies())
+  return _.filter((e: any) => e.type === 'erc-20', cryptoCurrencies())
 }
 
 export function isErc20Token(cryptoCode: string) {

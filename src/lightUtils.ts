@@ -1,4 +1,4 @@
-import find from 'lodash/fp/find'
+import _ from 'lodash/fp'
 
 import {CRYPTO_CURRENCIES} from './config/consts'
 
@@ -25,7 +25,7 @@ export function toUnit (cryptoAtoms: any, cryptoCode: string) {
 
 /* TODO: make cryptoCode more restrictive: https://www.typescriptlang.org/docs/handbook/enums.html */
 export function getCryptoCurrency (cryptoCode: string) {
-  const cryptoCurrency = find(['cryptoCode', cryptoCode], cryptoCurrencies())
+  const cryptoCurrency = _.find(['cryptoCode', cryptoCode], cryptoCurrencies())
   if (!cryptoCurrency) throw new Error(`Unsupported crypto: ${cryptoCode}`)
   return cryptoCurrency
 }
