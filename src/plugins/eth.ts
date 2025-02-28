@@ -30,7 +30,7 @@ class ETH implements CryptoPlugin {
         throw new Error('Invalid Address')
       }
 
-      if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT' || cryptoCode === 'USDC') {
+      if (rec.protocol === 'ethereum:' && cryptoCode === 'USDT') {
         address = rec.query.address as string /* TODO */
         if (address && this.isValidAddress(address)) return address
       }
