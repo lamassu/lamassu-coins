@@ -1,5 +1,3 @@
-import _ from 'lodash/fp'
-
 export enum CryptoCode {
   BTC = 'BTC',
   BCH = 'BCH',
@@ -246,6 +244,10 @@ const CRYPTOS = [
   },
 ]
 
-export const CRYPTO_CURRENCIES = _.orderBy(['code', 'cryptoCode'], ['asc', 'asc'], CRYPTOS)
+export const CRYPTO_CURRENCIES = [...CRYPTOS].sort((a, b) => {
+  const codeCompare = a.code.localeCompare(b.code);
+  if (codeCompare !== 0) return codeCompare;
+  return a.cryptoCode.localeCompare(b.cryptoCode);
+});
 
-export const ALL_CRYPTOS = _.keys(CryptoCode)
+export const ALL_CRYPTOS = Object.values(CryptoCode);

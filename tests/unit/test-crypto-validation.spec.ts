@@ -5,12 +5,12 @@ import {
   zecBech32Validator,
   zecBech32mValidator,
   xmrValidator,
-} from '../../built/plugins/validators'
-import BTC from '../../built/plugins/btc'
-import LTC from '../../built/plugins/ltc'
-import DASH from '../../built/plugins/dash'
-import XMR from '../../built/plugins/xmr'
-import ZEC from '../../built/plugins/zec'
+} from '../../dist/plugins/validators'
+import BTC from '../../dist/plugins/btc'
+import LTC from '../../dist/plugins/ltc'
+import DASH from '../../dist/plugins/dash'
+import XMR from '../../dist/plugins/xmr'
+import ZEC from '../../dist/plugins/zec'
 
 test('Should validate BTC P2PKH', () => {
   const mainNetaddr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'

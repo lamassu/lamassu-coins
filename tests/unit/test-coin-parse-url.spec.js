@@ -1,10 +1,10 @@
-const { default: BTC } = require('../../built/plugins/btc')
-const { default: LTC } = require('../../built/plugins/ltc')
-const { default: DASH } = require('../../built/plugins/dash')
-const { default: ZEC } = require('../../built/plugins/zec')
-const { default: ETH } = require('../../built/plugins/eth')
-const { default: BCH } = require('../../built/plugins/bch')
-const { default: TRX } = require('../../built/plugins/trx')
+const { default: BTC } = require('../../dist/plugins/btc')
+const { default: LTC } = require('../../dist/plugins/ltc')
+const { default: DASH } = require('../../dist/plugins/dash')
+const { default: ZEC } = require('../../dist/plugins/zec')
+const { default: ETH } = require('../../dist/plugins/eth')
+const { default: BCH } = require('../../dist/plugins/bch')
+const { default: TRX } = require('../../dist/plugins/trx')
 
 test('Should parse BTC address', () => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'

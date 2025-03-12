@@ -1,4 +1,4 @@
-import { getSupportedCoinsForAddress } from '../../built/plugins/detector'
+import { getSupportedCoinsForAddress } from '../../dist/plugins/detector'
 
 test('Should match all addresses', () => {
   const expected = [
