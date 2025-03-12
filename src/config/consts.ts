@@ -6,6 +6,7 @@ export enum CryptoCode {
   LTC = 'LTC',
   ZEC = 'ZEC',
   USDT = 'USDT',
+  USDC = 'USDC',
   XMR = 'XMR',
   TRX = 'TRX',
   USDT_TRON = 'USDT_TRON',
@@ -171,6 +172,22 @@ const CRYPTOS = [
       full: {
         displayScale: 6,
         displayCode: 'USDT'
+      }
+    },
+    isCashinOnly: true
+  },
+  {
+    cryptoCode: CryptoCode.USDC,
+    display: 'USDC',
+    code: 'usdc',
+    unitScale: 6,
+    contractAddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+    type: 'erc-20',
+    hideFromInstall: true,
+    units:{
+      full: {
+        displayScale: 6,
+        displayCode: 'USDC'
       }
     },
     isCashinOnly: true
