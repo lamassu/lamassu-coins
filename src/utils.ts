@@ -13,8 +13,9 @@ import BCH from './plugins/bch'
 import XMR from './plugins/xmr'
 import TRX from './plugins/trx'
 import LN from './plugins/ln'
+import SOL from './plugins/sol'
 
-const PLUGINS: { [key: string]: any } = {BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN}
+const PLUGINS: { [key: string]: any } = {BTC, ETH, ZEC, LTC, DASH, BCH, XMR, TRX, LN, SOL}
 
 export function cryptoCurrencies() {
   return CRYPTO_CURRENCIES

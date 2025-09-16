@@ -11,6 +11,7 @@ export enum CryptoCode {
   TRX = 'TRX',
   USDT_TRON = 'USDT_TRON',
   LN = 'LN',
+  SOL = 'SOL',
 }
 
 export const COINS = CryptoCode /* Keep COINS for backwards compat */
@@ -256,6 +257,19 @@ const CRYPTOS = [
       mili: {
         displayScale: 5,
         displayCode: 'mBTC'
+      }
+    }
+  },
+  {
+    cryptoCode: CryptoCode.SOL,
+    display: 'Solana',
+    code: 'solana',
+    unitScale: 9,
+    type: 'coin',
+    units:{
+      full: {
+        displayScale: 9,
+        displayCode: 'SOL'
       }
     }
   },
