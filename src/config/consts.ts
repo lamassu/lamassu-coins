@@ -19,6 +19,7 @@ const CRYPTOS = [
   {
     cryptoCode: CryptoCode.BTC,
     display: 'Bitcoin',
+    displayCode: 'BTC',
     code: 'bitcoin',
     configFile: 'bitcoin.conf',
     daemon: 'bitcoind',
@@ -26,20 +27,13 @@ const CRYPTOS = [
     unitScale: 8,
     zeroConf: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 8,
-        displayCode: 'BTC'
-      },
-      mili: {
-        displayScale: 5,
-        displayCode: 'mBTC'
-      }
-    }
+    urlPrefix: 'bitcoin',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.BCH,
     display: 'Bitcoin Cash',
+    displayCode: 'BCH',
     code: 'bitcoincash',
     configFile: 'bitcoincash.conf',
     daemon: 'bitcoincashd',
@@ -47,20 +41,13 @@ const CRYPTOS = [
     unitScale: 8,
     zeroConf: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 8,
-        displayCode: 'BCH'
-      },
-      mili: {
-        displayScale: 5,
-        displayCode: 'mBCH'
-      }
-    }
+    urlPrefix: 'bitcoincash:',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.DASH,
     display: 'Dash',
+    displayCode: 'DASH',
     code: 'dash',
     configFile: 'dash.conf',
     daemon: 'dashd',
@@ -68,20 +55,13 @@ const CRYPTOS = [
     unitScale: 8,
     zeroConf: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 8,
-        displayCode: 'DASH'
-      },
-      mili: {
-        displayScale: 5,
-        displayCode: 'mDASH'
-      }
-    }
+    urlPrefix: 'dash',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.ETH,
     display: 'Ethereum',
+    displayCode: 'ETH',
     code: 'ethereum',
     configFile: 'geth.conf',
     daemon: 'geth',
@@ -90,40 +70,26 @@ const CRYPTOS = [
     zeroConf: false,
     hideFromInstall: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 18,
-        displayCode: 'ETH'
-      },
-      mili: {
-        displayScale: 15,
-        displayCode: 'mETH'
-      }
-    }
+    urlPrefix: 'ethereum',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.TRX,
     display: 'Tron',
+    displayCode: 'TRX',
     code: 'tron',
     unitScale: 6,
     zeroConf: false,
     hideFromInstall: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 6,
-        displayCode: 'TRX'
-      },
-      mili: {
-        displayScale: 3,
-        displayCode: 'mTRX'
-      }
-    }
+    urlPrefix: 'tron',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.USDT_TRON,
     cryptoCodeDisplay: 'USDT (Tron)',
     display: 'USDT (Tron)',
+    displayCode: 'USDT (Tron)',
     code: 'tether_tron',
     unitScale: 6,
     zeroConf: false,
@@ -131,17 +97,15 @@ const CRYPTOS = [
     contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
     testnetContractAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
     type: 'trc-20',
-    units:{
-      full: {
-        displayScale: 6,
-        displayCode: 'USDT (Tron)'
-      }
-    },
-    isCashinOnly: true
+    isCashinOnly: true,
+    urlPrefix: 'tron',
+    urlAmount: 'amount',
+    validatorKey: 'TRX',
   },
   {
     cryptoCode: CryptoCode.LTC,
     display: 'Litecoin',
+    displayCode: 'LTC',
     code: 'litecoin',
     configFile: 'litecoin.conf',
     daemon: 'litecoind',
@@ -149,52 +113,43 @@ const CRYPTOS = [
     unitScale: 8,
     zeroConf: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 8,
-        displayCode: 'LTC'
-      },
-      mili: {
-        displayScale: 5,
-        displayCode: 'mLTC'
-      }
-    }
+    urlPrefix: 'litecoin',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.USDT,
     display: 'USDT',
+    displayCode: 'USDT',
     code: 'tether',
     unitScale: 6,
     contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     type: 'erc-20',
+    zeroConf: false,
     hideFromInstall: true,
-    units:{
-      full: {
-        displayScale: 6,
-        displayCode: 'USDT'
-      }
-    },
-    isCashinOnly: true
+    isCashinOnly: true,
+    urlPrefix: 'ethereum',
+    urlAmount: 'amount',
+    validatorKey: 'ETH',
   },
   {
     cryptoCode: CryptoCode.USDC,
     display: 'USDC',
+    displayCode: 'USDC',
     code: 'usdc',
     unitScale: 6,
     contractAddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     type: 'erc-20',
+    zeroConf: false,
     hideFromInstall: true,
-    units:{
-      full: {
-        displayScale: 6,
-        displayCode: 'USDC'
-      }
-    },
-    isCashinOnly: true
+    isCashinOnly: true,
+    urlPrefix: 'ethereum',
+    urlAmount: 'amount',
+    validatorKey: 'ETH',
   },
   {
     cryptoCode: CryptoCode.XMR,
     display: 'Monero',
+    displayCode: 'XMR',
     code: 'monero',
     configFile: 'monero.conf',
     daemon: 'monerod',
@@ -204,20 +159,13 @@ const CRYPTOS = [
     unitScale: 12,
     zeroConf: true,
     type: 'coin',
-    units: {
-      full: {
-        displayScale: 12,
-        displayCode: 'XMR'
-      },
-      mili: {
-        displayScale: 9,
-        displayCode: 'mXMR'
-      }
-    }
+    urlPrefix: 'monero',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.ZEC,
     display: 'Zcash',
+    displayCode: 'ZEC',
     code: 'zcash',
     configFile: 'zcash.conf',
     daemon: 'zcashd',
@@ -226,20 +174,13 @@ const CRYPTOS = [
     zeroConf: true,
     hideFromInstall: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 8,
-        displayCode: 'ZEC'
-      },
-      mili: {
-        displayScale: 5,
-        displayCode: 'mZEC'
-      }
-    }
+    urlPrefix: 'zcash',
+    urlAmount: 'amount',
   },
   {
     cryptoCode: CryptoCode.LN,
     display: 'Lightning Network',
+    displayCode: 'BTC',
     code: 'ln',
     configFile: null,
     daemon: null,
@@ -248,16 +189,8 @@ const CRYPTOS = [
     zeroConf: true,
     hideFromInstall: true,
     type: 'coin',
-    units:{
-      full: {
-        displayScale: 8,
-        displayCode: 'BTC'
-      },
-      mili: {
-        displayScale: 5,
-        displayCode: 'mBTC'
-      }
-    }
+    urlPrefix: 'lightining',
+    validatorKey: 'disabled',
   },
 ]
 

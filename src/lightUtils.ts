@@ -28,7 +28,9 @@ export function getCryptoCurrency(cryptoCode: string) {
   return cryptoCurrency;
 }
 
-export function formatCryptoAddress(cryptoCode: string = '', address: string = '') {
-  return cryptoCode === 'BCH' ? address.replace('bitcoincash:', '') : address
+export function formatCryptoAddress(address: string = '') {
+  // ignore url format
+  const splitAddress = address.split(':')
+  return splitAddress[1] ?? splitAddress[0]
 }
 

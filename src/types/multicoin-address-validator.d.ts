@@ -1,0 +1,1 @@
+declare module '@lamassu/multicoin-address-validator'

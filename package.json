@@ -1,20 +1,8 @@
 {
   "name": "@lamassu/coins",
-  "version": "v1.6.1",
+  "version": "v2.0.0",
   "dependencies": {
-    "@lamassu/bolt11": "1.5.1",
-    "bech32": "2.0.0",
-    "big-integer": "^1.6.48",
-    "bignumber.js": "^9.0.0",
-    "bitcoinjs-lib": "4.0.3",
-    "bitcore-lib-cash": "^8.25.25",
-    "blakejs": "^1.2.1",
-    "bs58check": "^2.0.2",
-    "cashaddrjs": "^0.4.4",
-    "crypto-js": "^3.1.9-1",
-    "ethereumjs-icap": "^0.3.2",
-    "keccak256": "^1.0.2",
-    "lodash": "^4.17.10"
+    "@lamassu/multicoin-address-validator": "^0.6.0"
   },
   "scripts": {
     "build": "tsc",
@@ -46,17 +34,7 @@
   "author": "Lamassu Industries",
   "license": "./LICENSE",
   "devDependencies": {
-    "@types/bitcoinjs-lib": "^4.0.1",
-    "@types/bitcore-lib-cash": "^8.23.8",
-    "@types/bn.js": "^5.1.2",
-    "@types/bs58check": "^2.1.2",
-    "@types/cashaddrjs": "^0.3.3",
-    "@types/crypto-js": "^4.2.2",
-    "@types/jest": "^29.5.12",
-    "@types/lodash": "^4.14.199",
     "@types/node": "^20.8.2",
-    "typescript": "^5.2.2",
-    "ts-jest": "^29.1.2",
-    "jest": "^29.7.0"
+    "typescript": "^5.2.2"
   }
 }
